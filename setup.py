@@ -25,13 +25,9 @@ setup(name='huBarcode',
       keywords = "barcode datamatrix qrcode",
       
       install_requires = ['PIL>=1.1'],
-      package_data = {
-            # If any package contains *.txt or *.rst files, include them:
-            '': ['*.txt', '*.rst'],
-        },
       
       zip_safe = True,
       package_dir = {'huBarcode': ''},
-      packages=['huBarcode', 'huBarcode.qrcode', 'huBarcode.qrcode.data', 'huBarcode.datamatrix'],
+      packages=['huBarcode', 'huBarcode.qrcode', 'huBarcode.qrcode.qrdata', 'huBarcode.datamatrix'],
       
 )
