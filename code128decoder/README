@@ -1,0 +1,82 @@
+
+About
+-----
+This software is for Code-128 barcode detection and decoding. 
+Primary is optimized for photos taken by digital camera with
+1MPix or so resolution.
+
+There are two variants -- barcode1 and barcode2: 
+    -- barcode1 is quick'n'dirty implementation
+    -- barcode2 is development version, unsuccessful attempt 
+                to recognize smaller images
+
+
+Requirements
+------------
+Module libjpeg-dev is required for reading JPEG images (at least 
+files jpeglib.h and jpeg.so should be in standard locations).
+
+
+Installation
+------------
+Just type "make" and optionally copy compiled barcode1 and barcode2 
+executables to $PATH. It should compile cleanly on most Linux and 
+*BSD distributions.
+
+
+Usage
+-----
+Just execute "./barcode1 image.jpg".
+Recognized barcode will be printed to standard output:
+
+    bash$ for i in test-images/* ; do ; \
+	      echo $i ; ./barcode1 $i ; done
+    test-images/01.jpg
+    HP+164701-41842-48
+    test-images/02.jpg
+    HP+164701-41842-48
+    test-images/03.jpg
+    HP+183601-65131-12
+    test-images/04.jpg
+    test-images/05.jpg
+    HP+183901-82130-80
+    test-images/06.jpg
+    HP+184001-12105-88
+    test-images/07.jpg
+    HP+184001-12105-88
+    test-images/08.jpg
+    test-images/09.jpg
+    test-images/10.jpg
+    test-images/11.jpg
+    HP+173902-74080-144
+    test-images/12.jpg
+    HP+200401-10201-18
+    test-images/13.jpg
+
+
+Algorithm
+---------
+Algorithms used are described directly in barcode1.c or barcode2.c
+source files.
+
+
+Manifest
+--------
+   barcode1.c    -- source of barcode1 program
+   barcode2.c    -- source of barcode2 program
+   code128.h     -- Code-128 symbol table
+   Makefile      -- makefile for make
+   test-images/  -- some testing photos
+   doc/          -- description of barcode2 algorithms
+   bboxs.tar.gz  -- bound-boxes of found barcodes
+   drafts/       -- old versions of various algorithms used
+   test/         -- cropped small barcodes for testing purposes
+   README        -- this document 
+
+
+Author
+------
+Coded by Martin Sarfy <sarfy@ics.muni.cz> on hire for HUDORA GmbH.
+Published under a BSD license.
+
+
