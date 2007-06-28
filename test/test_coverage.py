@@ -17,6 +17,14 @@ import datamatrix.matrixtest
 suite = unittest.TestLoader().loadTestsFromName('datamatrix.matrixtest.MatrixTest')
 unittest.TextTestRunner().run(suite)
 
+import ean13.eantest
+suite = unittest.TestLoader().loadTestsFromName('ean13.eantest.EAN13Test')
+unittest.TextTestRunner().run(suite)
+
+import code128.code128test
+suite = unittest.TestLoader().loadTestsFromName('code128.code128test.Code128Test')
+unittest.TextTestRunner().run(suite)
+
 
 coverage.stop()
 coverage.report(['qrcode/__init__.py',
@@ -29,5 +37,11 @@ coverage.report(['qrcode/__init__.py',
                  'datamatrix/renderer.py',
                  'datamatrix/reedsolomon.py',
                  'datamatrix/textencoder.py',
+				 'ean13/__init__.py',
+				 'ean13/encoding.py',
+				 'ean13/renderer.py',
+				 'code128/__init__.py',
+				 'code128/encoding.py',
+				 'code128/textencoder.py',
+				 'code128/renderer.py'
                  ])
-                            
