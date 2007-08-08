@@ -22,8 +22,7 @@ hubarcode = setup(name='huBarcode',
       # download_url
       package_dir = {'huBarcode': ''},
       packages=['huBarcode', 'huBarcode.qrcode', 'huBarcode.qrcode.qrcode_data', 'huBarcode.datamatrix', 'huBarcode.ean13', 'huBarcode.code128']
-
-      
+      zip_safe=False,      
 )
 
 from distutils import dir_util,file_util

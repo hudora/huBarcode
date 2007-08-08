@@ -32,6 +32,8 @@ charset_a = \
  'TO_B' : 100,     '\xf4' : 101,     '\xf1' : 102
 }
 
+charset_a_rev = dict([(x[1], x[0]) for x in charset_a.items()])
+
 charset_b = \
 {
     ' ' :   0,        '!' :   1,        '"' :   2,        '#' :   3,
@@ -62,11 +64,14 @@ charset_b = \
  '\xf4' : 100,     'TO_A' : 101,     '\xf1' : 102
 }
 
+charset_b_rev = dict([(x[1], x[0]) for x in charset_b.items()])
 
 charset_c = \
 {
     'TO_B' : 100,    'TO_A' : 101,    '\xf1' : 102
 }
+
+charset_c_rev = dict([(x[1], x[0]) for x in charset_c.items()])
 
 encodings = \
 {
@@ -177,5 +182,7 @@ encodings = \
     104: "11010010000",
     105: "11010011100",
 }
+
+encodings_rev = dict([(x[1], x[0]) for x in encodings.items()])
 
 STOP = "11000111010"
