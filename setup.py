@@ -1,4 +1,6 @@
-from distutils.core import setup
+from ez_setup import use_setuptools
+use_setuptools()
+from setuptools import setup
 
 # patch distutils if it can't cope with the "classifiers" or
 # "download_url" keywords
@@ -11,7 +13,7 @@ if version < '2.2.3':
 hubarcode = setup(name='huBarcode',
       maintainer='Maximillian Dornseif',
       maintainer_email='md@hudora.de',
-      url='http://www.hosted-projects.com/trac/hudora/public/wiki/huBarcode',
+      url='https://cybernetics.hudora.biz/projects/wiki/huBarcode',
       version='0.51',
       description='generation of barcodes in Python',
       classifiers=['License :: OSI Approved :: BSD License',
