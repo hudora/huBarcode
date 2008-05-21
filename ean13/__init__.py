@@ -33,6 +33,9 @@ class EAN13Encoder:
         p is the product code"""
 
         # Make sure it's 12 digits long
+        if len(code) == 13:
+            # cut of check digit
+            code = code[:-1]
         if code.isdigit() and len(code) == 12:
             self.code = code
             self.check_digit = self.calculate_check_digit()

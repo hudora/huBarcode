@@ -2,8 +2,11 @@
 
 __revision__ = "$Rev$"
 
-import Image, ImageFont, ImageDraw
 import os
+import Image
+import ImageFont
+import ImageDraw
+from pkg_resources import resource_filename
 
 # maps bar width against font size
 font_sizes = \
@@ -79,19 +82,16 @@ class EAN13Renderer:
         # Draw the text
         font_size = font_sizes.get(bar_width, 24)
             
-		# Locate the font file relative to the module
+        # Locate the font file relative to the module
         eandir, _ = os.path.split( __file__ )
-        rootdir, _ = os.path.split( eandir )  
-        fontfile = os.path.join( rootdir, "fonts", 
-                                "courR%02d.pil" % font_size )
+        rootdir, _ = os.path.split( eandir )
+        fontfile = resource_filename(__name__, "../../fonts/courR%02d.pil" % font_size)
         font = ImageFont.load_path( fontfile )
         draw = ImageDraw.Draw( img )
-        draw.text( (1*bar_width, int(image_height*.7)), 
+        draw.text( (1*bar_width, int(image_height*.7)),
                     self.code[0], font=font )
         draw.text( (16*bar_width, int(image_height*.8)),
                     self.code[1:7], font=font )
         draw.text( (63*bar_width, int(image_height*.8)), self.code[7:], font=font )
 
-        img.save( filename )
-
-
+        img.save( filename, "PNG" )
