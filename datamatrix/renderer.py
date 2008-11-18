@@ -66,19 +66,19 @@ class DataMatrixRenderer:
             
     def get_pilimage( self, cellsize ):
         """Return the matrix as an PIL object"""
-        
+    
         # add the quiet zone (2 x cell width)
-        self.add_border( colour=0, width=2 )
+        self.add_border(colour=0, width=2)
 
         # get the matrix into the right buffer format
-        buff = self.get_buffer( cellsize )
+        buff = self.get_buffer(cellsize)
 
         # write the buffer out to an image
-        img = Image.frombuffer( 'L', 
-                                (self.width*cellsize, self.height*cellsize),
-                                buff, 'raw', mode, 0, 1 )
+        img = Image.frombuffer('L', 
+                               (self.width*cellsize, self.height*cellsize),
+                               buff, 'raw', 'L', 0, 1)
         return img
-            
+
 
     def write_file( self, cellsize, filename ):
         """Write the matrix out to an image file"""
