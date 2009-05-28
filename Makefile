@@ -3,7 +3,7 @@ build:
 
 upload: build
 	python setup.py sdist bdist_egg
-	rsync -rvapP dist/* root@cybernetics.hudora.biz:/usr/local/www/data/nonpublic/eggs/
+	rsync -rvapP dist/* root@cybernetics.hudora.biz:/usr/local/www/data/dist/huBarcode/
 
 # publish:
 # 	# remove development tag
