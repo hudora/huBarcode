@@ -3,5 +3,5 @@
 # hudoratools
 # hudjango
 django
-python-memcached
+django-piston
 huBarcode
