@@ -1,5 +1,5 @@
 """Example code for datamatrix library"""
-__revision__ = "$Rev$"
+__revision__ = "$Revision$"
 
 from datamatrix import DataMatrixEncoder
 import sys

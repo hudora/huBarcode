@@ -1,5 +1,5 @@
 """Example code for ean13 library"""
-__revision__ = "$Rev$"
+__revision__ = "$Revision$"
 
 from ean13 import EAN13Encoder
 import sys

@@ -1,0 +1,7 @@
+# add names of required Python modules here
+# -f  https://cybernetics.hudora.biz/nonpublic/eggs/
+# hudoratools
+# hudjango
+django
+python-memcached
+huBarcode

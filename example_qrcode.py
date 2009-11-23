@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Example code for qrcode library"""
-__revision__ = "$Rev$"
+__revision__ = "$Revision$"
 
 from qrcode import QRCodeEncoder
 import sys

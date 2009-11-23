@@ -1,6 +1,6 @@
 """Rendering code for code128 barcode"""
 
-__revision__ = "$Rev: 1$"
+__revision__ = "$Revision: 1$"
 
 import Image, ImageFont, ImageDraw
 import logging, os
@@ -20,7 +20,7 @@ font_sizes = \
 class Code128Renderer:
     """Rendering class for code128 - given the bars and the original
     text, it will render an image of the barcode, including edge 
-    zones and text"""
+    zones and text."""
     
     def __init__( self, bars, text ):
         self.bars = bars
@@ -29,7 +29,7 @@ class Code128Renderer:
 
     def write_file( self, filename, bar_width ):
         """Write barcode data out to image file
-        filename - the name of the image file
+        filename - the name of the image file or an file object
         bar_width - the desired width in pixels of each bar"""
         
         # 11 bars per character, plus the stop
@@ -83,7 +83,7 @@ class Code128Renderer:
         # Draw the text
         font_size = font_sizes.get(bar_width, 24)
             
-		# Locate the font file relative to the module
+        # Locate the font file relative to the module
         c128dir, _ = os.path.split( __file__ )
         rootdir, _ = os.path.split( c128dir )  
         fontfile = os.path.join( rootdir, "fonts", 
@@ -96,4 +96,4 @@ class Code128Renderer:
         draw.text( (xtextpos, int(image_height*.8)), 
                     self.text, font=font )
 
-        img.save( filename )
+        img.save( filename, 'PNG')
