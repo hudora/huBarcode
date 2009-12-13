@@ -12,10 +12,7 @@ If you worry about copyright you might consider this Software BSD-Licensed.
 If you are still worried, you might consider it GPL1/2/3 compatible.
 But don't worry.
 
-!http://static.23.nu/md/Pictures/ZZ316E2222.png!
-!http://static.23.nu/md/Pictures/ZZ32089BA2.png!
-!http://static.23.nu/md/Pictures/ZZ2C796C67.png!
-!http://static.23.nu/md/Pictures/ZZ36151692.png!
+!http://static.23.nu/md/Pictures/ZZ316E2222.png! !http://static.23.nu/md/Pictures/ZZ32089BA2.png! !http://static.23.nu/md/Pictures/ZZ2C796C67.png! !http://static.23.nu/md/Pictures/ZZ36151692.png!
 
 The interface of the different encoders is fairly straightforward:
 
@@ -41,6 +38,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 h2. Download
+
 You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/
 or at "GitHub":http://github.com/mdornseif/huBarcode.
 
