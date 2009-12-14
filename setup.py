@@ -17,7 +17,7 @@ if version < '2.2.3':
 hubarcode = setup(name='huBarcode',
     maintainer='Maximillian Dornseif',
     maintainer_email='md@hudora.de',
-    url='https://cybernetics.hudora.biz/projects/wiki/huBarcode',
+    url='http://github.com/hudora/huBarcode',
     version='0.56p4',
     description='generation of barcodes in Python',
     long_description=long_description,
