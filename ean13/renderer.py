@@ -7,6 +7,7 @@ import Image
 import ImageFont
 import ImageDraw
 from pkg_resources import resource_filename
+from functools import reduce
 
 # maps bar width against font size
 font_sizes = \

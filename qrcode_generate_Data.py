@@ -20,7 +20,7 @@ for version in range(1, 41):
 
         filename = "qrcode_data/qrv" + str(version) + "_"
         filename += str(ecl) + ".dat"
-        fhndl = open(filename ,"rb")
+        fhndl = open(filename, "rb")
         unpack = lambda y: [ord(x) for x in y]
         matrix_d = []
         matrix_d.append(unpack(fhndl.read(byte_num)))

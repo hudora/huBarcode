@@ -59,7 +59,7 @@ class DataMatrixRenderer:
         self.matrix = \
             [[colour,]*self.width,]*width + \
             [[colour,]*width + self.matrix[i] + [colour,]*width 
-                    for i in range(0,self.height-(width*2))] + \
+                    for i in range(0, self.height-(width*2))] + \
             [[colour,]*self.width,]*width
         
         

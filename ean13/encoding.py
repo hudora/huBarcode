@@ -52,7 +52,7 @@ def get_left_encoded( digit, parity ):
 
     if parity not in (0, 1):
         raise Exception("Invalid parity '%s'" % parity)
-    elif digit not in range(0, 10):
+    elif digit not in list(range(0, 10)):
         raise Exception("Invalid digit '%s'" % digit)
     else:
         return encoding_table[digit][1-parity]
@@ -60,7 +60,7 @@ def get_left_encoded( digit, parity ):
 def get_right_encoded( digit ):    
     """Get the right hand encoding of the given digit"""
 
-    if digit not in range(0, 10):
+    if digit not in list(range(0, 10)):
         raise Exception("Invalid digit '%s'" % digit)
     else:
         return encoding_table[digit][2]

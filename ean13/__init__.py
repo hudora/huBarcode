@@ -17,6 +17,7 @@ __revision__ = "$Rev: 1$"
 
 import encoding
 from renderer import EAN13Renderer
+from functools import reduce
 
 GUARDS = ("101", "01010", "101")
 

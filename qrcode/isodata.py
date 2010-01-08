@@ -53,7 +53,7 @@ class MatrixInfo:
 
         filename = path + "/qrv" + str(version) + "_"
         filename += str(ecl) + ".dat"
-        fhndl = open(filename ,"rb")
+        fhndl = open(filename, "rb")
         unpack = lambda y: [ord(x) for x in y]
         self.matrix_d = []
         self.matrix_d.append(unpack(fhndl.read(self.byte_num)))
