@@ -22,7 +22,12 @@ class Code128Renderer:
     text, it will render an image of the barcode, including edge 
     zones and text."""
     
-    def __init__( self, bars, text ):
+    def __init__( self, bars, text, options={} ):
+        """ The options hash currently supports three options: 
+            * ttf_font: absolute path to a truetype font file used to render the label
+            * ttf_fontsize: the size the label is drawn in
+            * label_border: number of pixels space between the barcode and the label """
+        self.options = options
         self.bars = bars
         self.text = text
 
@@ -81,19 +86,25 @@ class Code128Renderer:
         writer.write_bars( self.bars )
 
         # Draw the text
-        font_size = font_sizes.get(bar_width, 24)
+        default_fontsize = font_sizes.get(bar_width, 24)
+        fontsize = self.options.get('ttf_fontsize', default_fontsize)
             
         # Locate the font file relative to the module
         c128dir, _ = os.path.split( __file__ )
         rootdir, _ = os.path.split( c128dir )  
-        fontfile = os.path.join( rootdir, "fonts", 
-                                "courR%02d.pil" % font_size )
-        font = ImageFont.load_path( fontfile )
+
+        ttf_font = self.options.get('ttf_font')
+        if ttf_font:
+            font = ImageFont.truetype( ttf_font, fontsize )
+        else:
+            fontfile = os.path.join( rootdir, "fonts", "courR%02d.pil" % fontsize )
+            font = ImageFont.load_path( fontfile )
+
         draw = ImageDraw.Draw( img )
 
-        xtextwidth = len(self.text) * font_size  
+        xtextwidth = font.getsize(self.text)[0]
         xtextpos = image_width/2 - (xtextwidth/2)
-        draw.text( (xtextpos, int(image_height*.8)), 
-                    self.text, font=font )
+        ytextpos = int(image_height*.8) + self.options.get('label_border',0)
+        draw.text( (xtextpos, ytextpos), self.text, font=font )
 
         img.save( filename, 'PNG')
