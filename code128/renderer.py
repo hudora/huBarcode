@@ -22,12 +22,12 @@ class Code128Renderer:
     text, it will render an image of the barcode, including edge 
     zones and text."""
     
-    def __init__( self, bars, text, options={} ):
+    def __init__( self, bars, text, options=None ):
         """ The options hash currently supports three options: 
             * ttf_font: absolute path to a truetype font file used to render the label
             * ttf_fontsize: the size the label is drawn in
             * label_border: number of pixels space between the barcode and the label """
-        self.options = options
+        self.options = options or {}
         self.bars = bars
         self.text = text
 
