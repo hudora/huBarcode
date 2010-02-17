@@ -32,7 +32,9 @@ class Code128Encoder:
         """ The options hash currently supports three options: 
             * ttf_font: absolute path to a truetype font file used to render the label
             * ttf_fontsize: the size the label is drawn in
-            * label_border: number of pixels space between the barcode and the label """
+            * label_border: number of pixels space between the barcode and the label
+            * bottom_border: number of pixels space between the label and the bottom border
+            * height: height of the image in pixels """
 
         self.options = options
         self.text = text
