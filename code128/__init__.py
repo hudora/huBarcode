@@ -28,8 +28,15 @@ class Code128Encoder:
     encoding input string and outputting the result"""
 
     
-    def __init__( self, text ):
+    def __init__( self, text, options=None ):
+        """ The options hash currently supports three options: 
+            * ttf_font: absolute path to a truetype font file used to render the label
+            * ttf_fontsize: the size the label is drawn in
+            * label_border: number of pixels space between the barcode and the label
+            * bottom_border: number of pixels space between the label and the bottom border
+            * height: height of the image in pixels """
 
+        self.options = options
         self.text = text
         encoder = TextEncoder( )
 
@@ -59,4 +66,4 @@ class Code128Encoder:
 
     def save( self, filename, bar_width=3 ):
         """Write the barcode out to an image file"""
-        Code128Renderer( self.bars, self.text ).write_file( filename, bar_width )
+        Code128Renderer( self.bars, self.text, self.options ).write_file( filename, bar_width )

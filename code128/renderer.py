@@ -22,7 +22,14 @@ class Code128Renderer:
     text, it will render an image of the barcode, including edge 
     zones and text."""
     
-    def __init__( self, bars, text ):
+    def __init__( self, bars, text, options=None ):
+        """ The options hash currently supports three options: 
+            * ttf_font: absolute path to a truetype font file used to render the label
+            * ttf_fontsize: the size the label is drawn in
+            * label_border: number of pixels space between the barcode and the label
+            * bottom_border: number of pixels space between the label and the bottom border
+            * height: height of the image in pixels """
+        self.options = options or {}
         self.bars = bars
         self.text = text
 
@@ -40,60 +47,64 @@ class Code128Renderer:
         # Quiet zone is 10 bar widths on each side
         quiet_width = bar_width * 10
 
+        # Locate and load the font file relative to the module
+        c128dir, _ = os.path.split( __file__ )
+        rootdir, _ = os.path.split( c128dir )  
+
+        default_fontsize = font_sizes.get(bar_width, 24)
+        fontsize = self.options.get('ttf_fontsize', default_fontsize)
+        ttf_font = self.options.get('ttf_font')
+        if ttf_font:
+            font = ImageFont.truetype( ttf_font, fontsize )
+        else:
+            fontfile = os.path.join( rootdir, "fonts", "courR%02d.pil" % fontsize )
+            font = ImageFont.load_path( fontfile )
+
         # Total image width
         image_width = (2 * quiet_width) + (num_bars * bar_width)
 
         # Image height 30% of width
-        image_height = image_width / 3 
-
-        log.debug( "Image is %d x %d", image_width, image_height )
+        label_border = self.options.get('label_border',0)
+        image_height = self.options.get('height') or (image_width / 3)
+        bar_height = image_height - label_border - fontsize
 
         # Image: has a white background
-        img = Image.new( 'L', (image_width, image_height), 255 )
+        bottom_border = self.options.get('bottom_border',0)
+        img = Image.new( 'L', (image_width, image_height + bottom_border), 255 )
 
         class BarWriter:
             """Class which moves across the image, writing out bars""" 
-            def __init__(self, img):
+            def __init__(self, img, bar_height):
                 self.img = img
                 self.current_x = quiet_width
                 self.symbol_top = quiet_width / 2
+                self.bar_height = bar_height
 
-            def write_bar( self, value, full=False ):
+            def write_bar( self, value):
                 """Draw a bar at the current position,
                 if the value is 1, otherwise move on silently"""
 
                 # only write anything to the image if bar value is 1
-                bar_height = int( image_height * (full and 0.9 or 0.8) )
                 if value == 1:
-                    for ypos in range(self.symbol_top, bar_height):
-                        for xpos in range(self.current_x, \
-                                            self.current_x+bar_width):
+                    for ypos in range(self.symbol_top, self.bar_height):
+                        for xpos in range(self.current_x,
+                                          self.current_x+bar_width):
                             img.putpixel( (xpos, ypos), 0 )
                 self.current_x += bar_width
 
-            def write_bars( self, bars, full=False ):
+            def write_bars( self, bars):
                 """write all bars to the image"""
                 for bar in bars:
-                    self.write_bar( int(bar), full )
+                    self.write_bar( int(bar))
 
-
-        writer = BarWriter( img )
+        # draw the barcode bars themself
+        writer = BarWriter( img, bar_height )
         writer.write_bars( self.bars )
 
         # Draw the text
-        font_size = font_sizes.get(bar_width, 24)
-            
-        # Locate the font file relative to the module
-        c128dir, _ = os.path.split( __file__ )
-        rootdir, _ = os.path.split( c128dir )  
-        fontfile = os.path.join( rootdir, "fonts", 
-                                "courR%02d.pil" % font_size )
-        font = ImageFont.load_path( fontfile )
         draw = ImageDraw.Draw( img )
-
-        xtextwidth = len(self.text) * font_size  
+        xtextwidth = font.getsize(self.text)[0]
         xtextpos = image_width/2 - (xtextwidth/2)
-        draw.text( (xtextpos, int(image_height*.8)), 
-                    self.text, font=font )
-
+        ytextpos = bar_height + label_border
+        draw.text( (xtextpos, ytextpos), self.text, font=font )
         img.save( filename, 'PNG')
