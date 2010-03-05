@@ -39,7 +39,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 h2. Download
 
-You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/ or at "GitHub":http://github.com/mdornseif/huBarcode.
+You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/ or at "GitHub":http://github.com/hudora/huBarcode#.
 
 
 h2. Changes
