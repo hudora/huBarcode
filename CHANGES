@@ -1,1 +1,3 @@
+0.57:   Code128 now supports TrueType Fonts and tie options bottom_border,
+        height, ttf_font, ttf_fontsize and label_border.
 0.56p5: better packaging of data files
