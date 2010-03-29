@@ -42,6 +42,14 @@ h2. Download
 You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/ or at "GitHub":http://github.com/hudora/huBarcode#.
 
 
+h2. Readers
+
+Let's collect a list of Open Source barcode readers here:
+
+* "ExactCODE;":http://www.exactcode.de/site/open_source/exactimage/bardecode/
+* "ZBar":http://sourceforge.net/projects/zbar/
+
+
 h2. Changes
 
 * 0.52 has better support for the package resources and can handle StreamIO objects as output destination for the EAN13 encoder.
