@@ -86,7 +86,8 @@ class EAN13Renderer:
         # Locate the font file relative to the module
         eandir, _ = os.path.split( __file__ )
         rootdir, _ = os.path.split( eandir )
-        fontfile = resource_filename(__name__, "../../fonts/courR%02d.pil" % font_size)
+        fontfile = os.path.join( rootdir, "fonts", "courR%02d.pil" % font_size )
+
         font = ImageFont.load_path( fontfile )
         draw = ImageDraw.Draw( img )
         draw.text( (1*bar_width, int(image_height*.7)),

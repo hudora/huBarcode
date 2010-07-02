@@ -9,19 +9,19 @@ import coverage # get it from http://www.nedbatchelder.com/code/modules/coverage
 coverage.erase()
 coverage.start()
 
-import qrcode.qrcodetest
+import hubarcode.qrcode.qrcodetest
 suite = unittest.TestLoader().loadTestsFromName('qrcode.qrcodetest.MatrixTest')
 unittest.TextTestRunner().run(suite)
 
-import datamatrix.matrixtest
+import hubarcode.datamatrix.matrixtest
 suite = unittest.TestLoader().loadTestsFromName('datamatrix.matrixtest.MatrixTest')
 unittest.TextTestRunner().run(suite)
 
-import ean13.eantest
+import hubarcode.ean13.eantest
 suite = unittest.TestLoader().loadTestsFromName('ean13.eantest.EAN13Test')
 unittest.TextTestRunner().run(suite)
 
-import code128.code128test
+import hubarcode.code128.code128test
 suite = unittest.TestLoader().loadTestsFromName('code128.code128test.Code128Test')
 unittest.TextTestRunner().run(suite)
 

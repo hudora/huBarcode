@@ -1,7 +1,7 @@
 """Example code for datamatrix library"""
 __revision__ = "$Revision$"
 
-from datamatrix import DataMatrixEncoder
+from hubarcode.datamatrix import DataMatrixEncoder
 import sys
 import logging
 
