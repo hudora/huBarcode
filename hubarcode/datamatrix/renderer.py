@@ -76,7 +76,7 @@ class DataMatrixRenderer:
         # write the buffer out to an image
         img = Image.frombuffer('L', 
                                (self.width*cellsize, self.height*cellsize),
-                               buff, 'raw', 'L', 0, 1)
+                               buff, 'raw', 'L', 0, -1)
         return img
 
 
