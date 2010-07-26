@@ -63,6 +63,14 @@ class Code128Encoder:
             
         return checksum % 103
 
+    def get_imagedata( self, bar_width=3 ):
+        """Write the matrix out to an PNG bytestream"""
+
+        barcode = Code128Renderer( self.bars, self.text, self.options )
+        return barcode.get_imagedata( bar_width )
+
+
+
 
     def save( self, filename, bar_width=3 ):
         """Write the barcode out to an image file"""

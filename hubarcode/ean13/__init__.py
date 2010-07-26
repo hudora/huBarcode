@@ -17,7 +17,11 @@ __revision__ = "$Rev: 1$"
 
 import encoding
 from renderer import EAN13Renderer
-from functools import reduce
+#handling movement of reduce to functools python >= 2.6
+try:
+    from functools import reduce
+except ImportError:
+   pass 
 
 GUARDS = ("101", "01010", "101")
 
@@ -95,6 +99,12 @@ class EAN13Encoder:
         # check digit is the number that can be added to the total
         # to get to a multiple of 10
         return (10 - (total % 10)) % 10
+    def get_imagedata( self, bar_width=3 ):
+        """Write the barcode out to a PNG bytestream"""
+        barcode = EAN13Renderer( self.full_code, self.left_bars,
+                self.right_bars, GUARDS )
+        return barcode.get_imagedata( bar_width )
+
 
 
     def save( self, filename, bar_width=3 ):
