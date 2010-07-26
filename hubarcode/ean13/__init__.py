@@ -21,12 +21,12 @@ from renderer import EAN13Renderer
 try:
     from functools import reduce
 except ImportError:
-    pass 
+    pass
 
 GUARDS = ("101", "01010", "101")
 
 class EAN13Encoder:
-    """Top-level class which handles the overall process of 
+    """Top-level class which handles the overall process of
     encoding input number and outputting the result"""
 
     def __init__( self, code ):
@@ -47,6 +47,8 @@ class EAN13Encoder:
             self.full_code = self.code + str(self.check_digit)
             self.left_bars = ""
             self.right_bars = ""
+            self.height = 0
+            self.width = 0
             self.encode( )
         else:
             raise Exception("code must be 12 digits long")
@@ -77,10 +79,10 @@ class EAN13Encoder:
 
     def calculate_check_digit( self ):
         """Modulo-10 calculation of the barcode check digit
-        First, we take the rightmost digit of the value and consider it to be 
-        an "odd" character. We then move right-to-left, alternating between 
-        odd and even. We then sum the numeric value of all the even positions, 
-        and sum the numeric value multiplied by three of all the 
+        First, we take the rightmost digit of the value and consider it to be
+        an "odd" character. We then move right-to-left, alternating between
+        odd and even. We then sum the numeric value of all the even positions,
+        and sum the numeric value multiplied by three of all the
         odd positions."""
 
         def sum_str( total, digit ):
@@ -110,7 +112,7 @@ class EAN13Encoder:
 
     def save( self, filename, bar_width=3 ):
         """Write the barcode out to an image file"""
-        EAN13Renderer( self.full_code, 
-                        self.left_bars, 
-                        self.right_bars, 
+        EAN13Renderer( self.full_code,
+                        self.left_bars,
+                        self.right_bars,
                         GUARDS ).write_file( filename, bar_width )

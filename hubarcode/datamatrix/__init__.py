@@ -50,7 +50,8 @@ class DataMatrixEncoder:
 
         enc = TextEncoder( )
         codewords = enc.encode( text )
-        
+        self.width = 0
+        self.height = 0
         matrix_size = enc.mtx_size
 
         self.matrix = [[None, ]*matrix_size for _ in range(0, matrix_size)]

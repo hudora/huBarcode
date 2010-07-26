@@ -38,6 +38,8 @@ class Code128Encoder:
 
         self.options = options
         self.text = text
+        self.height = 0
+        self.width = 0
         encoder = TextEncoder( )
 
         self.encoded_text = encoder.encode( self.text )
@@ -68,12 +70,13 @@ class Code128Encoder:
 
         barcode = Code128Renderer( self.bars, self.text, self.options )
         imagedata = barcode.get_imagedata( bar_width ) 
-        self.width = barcode.width
-        self.height = barcode.height
+        self.width = barcode.image_width
+        self.height = barcode.image_height
         return imagedata
 
 
 
     def save( self, filename, bar_width=3 ):
         """Write the barcode out to an image file"""
-        Code128Renderer( self.bars, self.text, self.options ).write_file( filename, bar_width )
+        Code128Renderer( self.bars, self.text,
+            self.options ).write_file( filename, bar_width )
