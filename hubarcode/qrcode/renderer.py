@@ -34,7 +34,7 @@ class QRCodeRenderer:
 
 
     def get_pilimage(self, cellsize):
-        """Return the matrix as an PIL object""" 
+        """Return the matrix as a PIL object"""
 
         # add the quiet zone (4 x cell width)
         self.add_border(colour=0, width=4)
@@ -49,17 +49,17 @@ class QRCodeRenderer:
                     buff)
         return img
 
-    def write_file( self, cellsize, filename ): 
-        """Write the matrix out to an image file""" 
-        img = self.get_pilimage( cellsize ) 
-        img.save( filename ) 
+    def write_file( self, cellsize, filename ):
+        """Write the matrix out to an image file"""
+        img = self.get_pilimage( cellsize )
+        img.save( filename )
 
-    def get_imagedata( self, cellsize): 
-        """Write the matrix out as PNG to an bytestream""" 
-        buffer = StringIO() 
-        img = self.get_pilimage( cellsize ) 
-        img.save( buffer, "PNG" ) 
-        return buffer.getvalue() 
+    def get_imagedata( self, cellsize ):
+        """Write the matrix out as PNG to an bytestream"""
+        imagedata = StringIO()
+        img = self.get_pilimage( cellsize )
+        img.save( imagedata, "PNG" )
+        return imagedata.getvalue()
 
     def get_buffer(self, cellsize):
         """Convert the matrix into the buffer format used by PIL"""

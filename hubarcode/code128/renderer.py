@@ -9,7 +9,7 @@ import logging, os
 log = logging.getLogger( "code128" )
 
 # maps bar width against font size
-font_sizes = \
+FONT_SIZES = \
 {
     1: 8,
     2: 14,
@@ -33,8 +33,8 @@ class Code128Renderer:
         self.options = options or {}
         self.bars = bars
         self.text = text
-
-
+        self.image_width = None
+        self.image_height = None
 
     def get_pilimage( self, bar_width ):
         """Return the barcode as a PIL object"""
@@ -51,26 +51,28 @@ class Code128Renderer:
         c128dir, _ = os.path.split( __file__ )
         rootdir, _ = os.path.split( c128dir )  
 
-        default_fontsize = font_sizes.get(bar_width, 24)
+        default_fontsize = FONT_SIZES.get(bar_width, 24)
         fontsize = self.options.get('ttf_fontsize', default_fontsize)
         ttf_font = self.options.get('ttf_font')
         if ttf_font:
             font = ImageFont.truetype( ttf_font, fontsize )
         else:
-            fontfile = os.path.join( rootdir, "fonts", "courR%02d.pil" % fontsize )
+            fontfile = os.path.join( rootdir, "fonts",
+                "courR%02d.pil" % fontsize )
             font = ImageFont.load_path( fontfile )
 
         # Total image width
-        image_width = (2 * quiet_width) + (num_bars * bar_width)
+        self.image_width = (2 * quiet_width) + (num_bars * bar_width)
 
         # Image height 30% of width
-        label_border = self.options.get('label_border',0)
-        image_height = self.options.get('height') or (image_width / 3)
-        bar_height = image_height - label_border - fontsize
+        label_border = self.options.get('label_border', 0)
+        self.image_height = self.options.get('height') or (self.image_width / 3)
+        bar_height = self.image_height - label_border - fontsize
 
         # Image: has a white background
-        bottom_border = self.options.get('bottom_border',0)
-        img = Image.new( 'L', (image_width, image_height + bottom_border), 255 )
+        bottom_border = self.options.get('bottom_border', 0)
+        img = Image.new( 'L', (self.image_width,
+            self.image_height + bottom_border), 255 )
 
         class BarWriter:
             """Class which moves across the image, writing out bars""" 
@@ -105,11 +107,9 @@ class Code128Renderer:
         # Draw the text
         draw = ImageDraw.Draw( img )
         xtextwidth = font.getsize(self.text)[0]
-        xtextpos = image_width/2 - (xtextwidth/2)
+        xtextpos = self.image_width/2 - (xtextwidth/2)
         ytextpos = bar_height + label_border
         draw.text( (xtextpos, ytextpos), self.text, font=font )
-        self.height = image_height
-        self.width = image_width
         return img 
 
     def write_file( self, filename, bar_width):
@@ -121,8 +121,8 @@ class Code128Renderer:
 
     def get_imagedata( self, bar_width ): 
         """Write the matrix out as PNG to an bytestream""" 
-        buffer = StringIO() 
+        imagedata = StringIO() 
         img = self.get_pilimage( bar_width ) 
-        img.save( buffer, "PNG" ) 
-        return buffer.getvalue() 
+        img.save( imagedata, "PNG" ) 
+        return imagedata.getvalue() 
 

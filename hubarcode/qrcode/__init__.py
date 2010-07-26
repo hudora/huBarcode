@@ -27,6 +27,8 @@ class QRCodeEncoder:
 
         enc = TextEncoder()
         self.matrix = enc.encode(text, ecl)
+        self.height = 0
+        self.width = 0
 
     def save(self, filename, cellsize=5):
         """Write the matrix out to an image file"""
@@ -34,15 +36,15 @@ class QRCodeEncoder:
         qrc = QRCodeRenderer(self.matrix)
         qrc.write_file(cellsize, filename)
 
-    def get_imagedata( self, cellsize=5 ): 
-        """Write the matrix out to an PNG bytestream""" 
-	 
+    def get_imagedata( self, cellsize=5 ):
+        """Write the matrix out to a PNG bytestream"""
+
         qrc = QRCodeRenderer(self.matrix)
         imagedata = qrc.get_imagedata( cellsize )
         self.height = qrc.mtx_size
         self.width = qrc.mtx_size
         return imagedata
-    
+
     def get_ascii(self):
         """Return an ascii representation of the matrix"""
         qrc = QRCodeRenderer(self.matrix)
