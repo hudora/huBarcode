@@ -7,7 +7,11 @@ import Image
 import ImageFont
 import ImageDraw
 from pkg_resources import resource_filename
-from functools import reduce
+#handling movement of reduce to functools python >= 2.6
+try:
+    from functools import reduce
+except ImportError:
+   pass 
 
 # maps bar width against font size
 font_sizes = \
@@ -99,3 +103,12 @@ class EAN13Renderer:
         bar_width - the desired width of each bar"""
         img = self.get_pilimage( bar_width )
         img.save( filename, "PNG" )
+
+    def get_imagedata( self, bar_width ): 
+        """Write the matrix out as PNG to a bytestream""" 
+        buffer = StringIO() 
+        img = self.get_pilimage( bar_width ) 
+        img.save( buffer, "PNG" ) 
+        return buffer.getvalue() 
+
+

@@ -2,6 +2,7 @@
 
 __revision__ = "$Revision: 1$"
 
+from cStringIO import StringIO
 import Image, ImageFont, ImageDraw
 import logging, os
 
@@ -115,4 +116,11 @@ class Code128Renderer:
         bar_width - the desired width in pixels of each bar"""
         img = self.get_pilimage( bar_width )
         img.save( filename, 'PNG')
+
+    def get_imagedata( self, bar_width ): 
+        """Write the matrix out as PNG to an bytestream""" 
+        buffer = StringIO() 
+        img = self.get_pilimage( bar_width ) 
+        img.save( buffer, "PNG" ) 
+        return buffer.getvalue() 
 
