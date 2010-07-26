@@ -21,7 +21,7 @@ from renderer import EAN13Renderer
 try:
     from functools import reduce
 except ImportError:
-   pass 
+    pass 
 
 GUARDS = ("101", "01010", "101")
 
@@ -103,9 +103,10 @@ class EAN13Encoder:
         """Write the barcode out to a PNG bytestream"""
         barcode = EAN13Renderer( self.full_code, self.left_bars,
                 self.right_bars, GUARDS )
-        return barcode.get_imagedata( bar_width )
-
-
+        imagedata = barcode.get_imagedata( bar_width )
+        self.height = barcode.height
+        self.width = barcode.width
+        return imagedata
 
     def save( self, filename, bar_width=3 ):
         """Write the barcode out to an image file"""

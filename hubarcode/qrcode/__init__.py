@@ -38,8 +38,11 @@ class QRCodeEncoder:
         """Write the matrix out to an PNG bytestream""" 
 	 
         qrc = QRCodeRenderer(self.matrix)
-        return qrc.get_imagedata( cellsize ) 
-
+        imagedata = qrc.get_imagedata( cellsize )
+        self.height = qrc.mtx_size
+        self.width = qrc.mtx_size
+        return imagedata
+    
     def get_ascii(self):
         """Return an ascii representation of the matrix"""
         qrc = QRCodeRenderer(self.matrix)

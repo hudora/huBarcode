@@ -108,6 +108,8 @@ class Code128Renderer:
         xtextpos = image_width/2 - (xtextwidth/2)
         ytextpos = bar_height + label_border
         draw.text( (xtextpos, ytextpos), self.text, font=font )
+        self.height = image_height
+        self.width = image_width
         return img 
 
     def write_file( self, filename, bar_width):
