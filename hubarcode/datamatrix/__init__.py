@@ -70,6 +70,8 @@ class DataMatrixEncoder:
         """Write the matrix out to an PNG bytestream"""
 
         dmtx = DataMatrixRenderer( self.matrix )
+        self.width = dmtx.width
+        self.height = dmtx.height
         return dmtx.get_imagedata( cellsize )
 
 

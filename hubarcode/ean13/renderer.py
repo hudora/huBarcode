@@ -11,8 +11,9 @@ from pkg_resources import resource_filename
 try:
     from functools import reduce
 except ImportError:
-   pass 
+    pass 
 
+from cStringIO import StringIO
 # maps bar width against font size
 font_sizes = \
 {
@@ -95,6 +96,8 @@ class EAN13Renderer:
         draw.text( (16*bar_width, int(image_height*.8)),
                     self.code[1:7], font=font )
         draw.text( (63*bar_width, int(image_height*.8)), self.code[7:], font=font )
+        self.width = image_width
+        self.height = image_height
         return img
     
     def write_file( self, filename, bar_width ):

@@ -67,8 +67,10 @@ class Code128Encoder:
         """Write the matrix out to an PNG bytestream"""
 
         barcode = Code128Renderer( self.bars, self.text, self.options )
-        return barcode.get_imagedata( bar_width )
-
+        imagedata = barcode.get_imagedata( bar_width ) 
+        self.width = barcode.width
+        self.height = barcode.height
+        return imagedata
 
 
 
