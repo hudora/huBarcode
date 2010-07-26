@@ -34,10 +34,9 @@ class Code128Renderer:
         self.text = text
 
 
-    def write_file( self, filename, bar_width ):
-        """Write barcode data out to image file
-        filename - the name of the image file or an file object
-        bar_width - the desired width in pixels of each bar"""
+
+    def get_pilimage( self, bar_width ):
+        """Return the barcode as a PIL object"""
         
         # 11 bars per character, plus the stop
         num_bars = len(self.bars)
@@ -97,6 +96,7 @@ class Code128Renderer:
                 for bar in bars:
                     self.write_bar( int(bar))
 
+
         # draw the barcode bars themself
         writer = BarWriter( img, bar_height )
         writer.write_bars( self.bars )
@@ -107,4 +107,12 @@ class Code128Renderer:
         xtextpos = image_width/2 - (xtextwidth/2)
         ytextpos = bar_height + label_border
         draw.text( (xtextpos, ytextpos), self.text, font=font )
+        return img 
+
+    def write_file( self, filename, bar_width):
+        """Write barcode data out to image file
+        filename - the name of the image file or an file object
+        bar_width - the desired width in pixels of each bar"""
+        img = self.get_pilimage( bar_width )
         img.save( filename, 'PNG')
+
