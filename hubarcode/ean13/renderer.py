@@ -30,11 +30,7 @@ class EAN13Renderer:
         self.right_bars = right_bars
         self.guards = guards
 
-    def write_file( self, filename, bar_width ):
-        """Write barcode data out to image file
-        filename - the name of the image file
-        bar_width - the desired width of each bar"""
-
+    def get_pilimage( self, bar_width):
         def sum_len( total, item ):
             """add the length of a given item to the total"""
             return total + len(item)
@@ -95,5 +91,11 @@ class EAN13Renderer:
         draw.text( (16*bar_width, int(image_height*.8)),
                     self.code[1:7], font=font )
         draw.text( (63*bar_width, int(image_height*.8)), self.code[7:], font=font )
-
+        return img
+    
+    def write_file( self, filename, bar_width ):
+        """Write barcode data out to image file
+        filename - the name of the image file
+        bar_width - the desired width of each bar"""
+        img = self.get_pilimage( bar_width )
         img.save( filename, "PNG" )
