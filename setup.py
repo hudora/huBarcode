@@ -30,5 +30,6 @@ hubarcode = setup(name='huBarcode',
     #package_dir = {'hubarcode/ean13': 'ean13',
     #               'hubarcode/code128': 'code128'},
     packages=find_packages(),
+    package_data={'hubarcode': ['fonts/*.pil', 'fonts/*.pbm']},
     zip_safe=False,
 )

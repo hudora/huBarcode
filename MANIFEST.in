@@ -1,5 +1,2 @@
-include README.txt
-include *.py
-include *.dat
-include *.pbm
-include *.pil
+include hubarcode/fonts/*.pil
+include hubarcode/fonts/*.pbm
