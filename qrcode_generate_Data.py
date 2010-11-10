@@ -13,13 +13,19 @@ if not os.path.exists('qrcode/data'):
 INIT = open('qrcode/data/__init__.py', 'w')
 INIT.close()
 
+
+ROOT_DIR = os.path.dirname(__file__)
+QRCODE_DIR = os.path.join(ROOT_DIR, 'qrcode')
+QRCODE_DATA_DIR = os.path.join(QRCODE_DIR, 'qrcode_data')
+
+
 for version in range(1, 41):
     for ecl in range(0, 4):
         byte_num = (isodata.MATRIX_REMAIN_BIT[version] +
                         (isodata.MAX_CODEWORDS[version] << 3))
 
-        filename = "qrcode_data/qrv" + str(version) + "_"
-        filename += str(ecl) + ".dat"
+        filename = 'qrv%s_%s.dat' % (version, ecl)
+        filename = os.path.join(QRCODE_DATA_DIR, filename)
         fhndl = open(filename, "rb")
         unpack = lambda y: [ord(x) for x in y]
         matrix_d = []
@@ -50,7 +56,8 @@ for version in range(1, 41):
         qrv.write('from hubarcode.qrcode.data.fr%d import frame_data\n' % version)
         qrv.close()
 
-        filename = "qrcode_data/rsc" + str(rs_ecc_codewords) + ".dat"
+        filename = 'rsc%s.dat' % rs_ecc_codewords
+        filename = os.path.join(QRCODE_DATA_DIR, filename)
         fhndl = open(filename, "rb")
 
         rs_cal_table = []
@@ -66,7 +73,8 @@ for version in range(1, 41):
                                                  cPickle.dumps(rs_cal_table))
         rsc.close()
 
-    filename = "qrcode_data/qrvfr" + str(version) + ".dat"
+    filename = 'qrvfr%s.dat' % version
+    filename = os.path.join(QRCODE_DATA_DIR, filename)
     fhndl = open(filename, "rb")
     frame_data_str = fhndl.read(65535)
     frame_data = []
