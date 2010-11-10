@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-""" Generate python modules from QR Code data files.
+""" Generate python module (qrcode.mem) from QR Code data files.
 Just run it in directory which contains 'qrcode' (QR Code python library)
 and 'qrcode_data' subdirs.
 """
