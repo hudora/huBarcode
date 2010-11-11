@@ -1,3 +1,4 @@
+0.62:   better access to PIL/Image Data
 0.61:   fixed QRcode installation issues (thanks Vladimir Mihailenco)
 0.57:   Code128 now supports TrueType Fonts and tie options bottom_border,
         height, ttf_font, ttf_fontsize and label_border.

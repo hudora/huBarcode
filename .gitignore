@@ -5,3 +5,4 @@ dist
 *.pyc
 huBarcode.egg-info
 *.egg-info
+MANIFEST

@@ -53,4 +53,6 @@ Open Source barcode decoders we are aware of:
 
 h2. Changes
 
-* 0.52 has better support for the package resources and can handle StreamIO objects as output destination for the EAN13 encoder.
+See the [Changelog][changes].
+
+[changes]: https://github.com/hudora/huBarcode/blob/master/CHANGES
