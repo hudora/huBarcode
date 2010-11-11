@@ -85,5 +85,11 @@ setup(
                  'Intended Audience :: Developers',
                  'Programming Language :: Python',
                  'Topic :: Multimedia :: Graphics',
-                 'Topic :: Office/Business',],
+                 'Topic :: Office/Business'],
+    # download_url
+    #package_dir = {'hubarcode/ean13': 'ean13',
+    #               'hubarcode/code128': 'code128'},
+    packages=find_packages(),
+    package_data={'hubarcode': ['fonts/*.pil', 'fonts/*.pbm']},
+    zip_safe=False,
 )
