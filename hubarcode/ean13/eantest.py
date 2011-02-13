@@ -1,7 +1,5 @@
 """Unit test for EAN-13 barcode encoder"""
 
-__revision__ = "$Rev$"
-
 import unittest
 
 from __init__ import EAN13Encoder
@@ -29,12 +27,12 @@ class EAN13Test(unittest.TestCase):
                         "000000001001": 6,
                         "000000000001": 7,
                         "000000001010": 8,
-                        "000000000010": 9 } 
+                        "000000000010": 9 }
         for code, check in check_digits.items():
             enc = EAN13Encoder( code )
             self.assertEqual( enc.check_digit, check )
 
-    def test_parity(self): 
+    def test_parity(self):
         """Test the parity calculations"""
         enc = EAN13Encoder( "750103131130" )
         self.assertEqual( enc.get_parity( ), (1, 0, 1, 0, 1, 0) )
@@ -56,8 +54,8 @@ class EAN13Test(unittest.TestCase):
 
             import filecmp
             self.failUnless(filecmp.cmp('test.png',
-                            'ean13/test_img/%d.png' % (index + 1)))
-         
+                            'hubarcode/ean13/test_img/%d.png' % (index + 1)))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,7 +1,5 @@
 """Unit test for QR Code barcode encoder"""
 
-__revision__ = "$Rev$"
-
 import unittest
 
 from qrcode import QRCodeEncoder
@@ -45,7 +43,7 @@ class MatrixTest(unittest.TestCase):
 
             import filecmp
             self.failUnless(filecmp.cmp('test.png',
-                                        'qrcode/test_img/%d.png' % i))
+                                        'hubarcode/qrcode/test_img/%d.png' % i))
             i += 1
 
 
@@ -53,7 +51,7 @@ class MatrixTest(unittest.TestCase):
         """Test that text is correctly encoded, and also that padding
         and error codewords are correctly added"""
 
-        correct_encodings = { 
+        correct_encodings = {
             "hi" : [64, 38, 134, 144, 236, 17, 236, 17, 236, 17, 236,
                     17, 236, 17, 236, 17, 17, 160, 77, 193, 121, 155,
                     5, 133, 245, 218],
@@ -73,4 +71,3 @@ class MatrixTest(unittest.TestCase):
         for key, value in correct_encodings.items():
             enc.encode(key, ecl='M')
             self.assertEqual(enc.codewords, value)
-

@@ -46,9 +46,11 @@ h2. Decoders
 
 Open Source barcode decoders we are aware of:
 
+* "ZXing (Zebra Crossing)":http://code.google.com/p/zxing/ (higly recommended)
 * "ExactCODE;":http://www.exactcode.de/site/open_source/exactimage/bardecode/
 * "ZBar":http://sourceforge.net/projects/zbar/
 * "pydmtx":http://libdmtx.wikidot.com/libdmtx-python-wrapper
+
 
 
 h2. Changes

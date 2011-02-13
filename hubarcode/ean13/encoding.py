@@ -1,7 +1,5 @@
 """Encoding tables and functions for EAN-13 barcode"""
 
-__revision__ = "$Rev: 1$"
-
 #
 # Map the first number system digit to the parity encodings for the
 # following fields, in order:

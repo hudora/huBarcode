@@ -1,30 +1,39 @@
 #!/usr/bin/env python
 """Coverage and unittest for datamatrix and QR Code library"""
-__revision__ = "$Revision$"
 
-import sys, unittest
-sys.path.append('.')
+import sys
+import unittest
+
 import coverage # get it from http://www.nedbatchelder.com/code/modules/coverage.html
+
+exitcode = 0
 
 coverage.erase()
 coverage.start()
 
 import hubarcode.qrcode.qrcodetest
 suite = unittest.TestLoader().loadTestsFromName('qrcode.qrcodetest.MatrixTest')
-unittest.TextTestRunner().run(suite)
+results = unittest.TextTestRunner().run(suite)
+if not results.wasSuccessful():
+    exitcode += 1
 
 import hubarcode.datamatrix.matrixtest
 suite = unittest.TestLoader().loadTestsFromName('datamatrix.matrixtest.MatrixTest')
-unittest.TextTestRunner().run(suite)
+results = unittest.TextTestRunner().run(suite)
+if not results.wasSuccessful():
+    exitcode += 1
 
 import hubarcode.ean13.eantest
 suite = unittest.TestLoader().loadTestsFromName('ean13.eantest.EAN13Test')
-unittest.TextTestRunner().run(suite)
+results = unittest.TextTestRunner().run(suite)
+if not results.wasSuccessful():
+    exitcode += 1
 
 import hubarcode.code128.code128test
-suite = unittest.TestLoader().loadTestsFromName('code128.code128test.Code128Test')
-unittest.TextTestRunner().run(suite)
-
+suite = unittest.TestLoader().loadTestsFromName('hubarcode.code128.code128test.Code128Test')
+results = unittest.TextTestRunner().run(suite)
+if not results.wasSuccessful():
+    exitcode += 1
 
 coverage.stop()
 coverage.report(['qrcode/__init__.py',
@@ -37,11 +46,13 @@ coverage.report(['qrcode/__init__.py',
                  'datamatrix/renderer.py',
                  'datamatrix/reedsolomon.py',
                  'datamatrix/textencoder.py',
-				 'ean13/__init__.py',
-				 'ean13/encoding.py',
-				 'ean13/renderer.py',
-				 'code128/__init__.py',
-				 'code128/encoding.py',
-				 'code128/textencoder.py',
-				 'code128/renderer.py'
+                 'ean13/__init__.py',
+                 'ean13/encoding.py',
+                 'ean13/renderer.py',
+                 'code128/__init__.py',
+                 'code128/encoding.py',
+                 'code128/textencoder.py',
+                 'code128/renderer.py'
                  ])
+
+sys.exit(exitcode)

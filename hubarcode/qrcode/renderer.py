@@ -1,8 +1,6 @@
 """QR Code renderer"""
 
-__revision__ = "$Rev$"
-
-from cStringIO import StringIO 
+from cStringIO import StringIO
 import Image
 
 class QRCodeRenderer:
@@ -46,7 +44,7 @@ class QRCodeRenderer:
         img = Image.frombuffer(
                     'L',
                     (self.mtx_size * cellsize, self.mtx_size * cellsize),
-                    buff)
+                    buff, 'raw', 'L', 0, -1)
         return img
 
     def write_file( self, cellsize, filename ):
@@ -104,4 +102,3 @@ class QRCodeRenderer:
                for row in self.matrix]) + '\n'
     # end def get_ascii
 # end class QRCodeRenderer
-

@@ -1,6 +1,5 @@
 """Rendering code for code128 barcode"""
 
-__revision__ = "$Revision: 1$"
 
 from cStringIO import StringIO
 import Image, ImageFont, ImageDraw
@@ -20,11 +19,11 @@ FONT_SIZES = \
 
 class Code128Renderer:
     """Rendering class for code128 - given the bars and the original
-    text, it will render an image of the barcode, including edge 
+    text, it will render an image of the barcode, including edge
     zones and text."""
-    
+
     def __init__( self, bars, text, options=None ):
-        """ The options hash currently supports three options: 
+        """ The options hash currently supports three options:
             * ttf_font: absolute path to a truetype font file used to render the label
             * ttf_fontsize: the size the label is drawn in
             * label_border: number of pixels space between the barcode and the label
@@ -38,7 +37,7 @@ class Code128Renderer:
 
     def get_pilimage( self, bar_width ):
         """Return the barcode as a PIL object"""
-        
+
         # 11 bars per character, plus the stop
         num_bars = len(self.bars)
 
@@ -49,7 +48,7 @@ class Code128Renderer:
 
         # Locate and load the font file relative to the module
         c128dir, _ = os.path.split( __file__ )
-        rootdir, _ = os.path.split( c128dir )  
+        rootdir, _ = os.path.split( c128dir )
 
         default_fontsize = FONT_SIZES.get(bar_width, 24)
         fontsize = self.options.get('ttf_fontsize', default_fontsize)
@@ -75,7 +74,7 @@ class Code128Renderer:
             self.image_height + bottom_border), 255 )
 
         class BarWriter:
-            """Class which moves across the image, writing out bars""" 
+            """Class which moves across the image, writing out bars"""
             def __init__(self, img, bar_height):
                 self.img = img
                 self.current_x = quiet_width
@@ -110,7 +109,7 @@ class Code128Renderer:
         xtextpos = self.image_width/2 - (xtextwidth/2)
         ytextpos = bar_height + label_border
         draw.text( (xtextpos, ytextpos), self.text, font=font )
-        return img 
+        return img
 
     def write_file( self, filename, bar_width):
         """Write barcode data out to image file
@@ -119,10 +118,9 @@ class Code128Renderer:
         img = self.get_pilimage( bar_width )
         img.save( filename, 'PNG')
 
-    def get_imagedata( self, bar_width ): 
-        """Write the matrix out as PNG to an bytestream""" 
-        imagedata = StringIO() 
-        img = self.get_pilimage( bar_width ) 
-        img.save( imagedata, "PNG" ) 
-        return imagedata.getvalue() 
-
+    def get_imagedata( self, bar_width ):
+        """Write the matrix out as PNG to an bytestream"""
+        imagedata = StringIO()
+        img = self.get_pilimage( bar_width )
+        img.save( imagedata, "PNG" )
+        return imagedata.getvalue()

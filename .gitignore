@@ -6,3 +6,8 @@ dist
 huBarcode.egg-info
 *.egg-info
 MANIFEST
+.coverage
+datamatrix-test.png
+pip-log.txt
+test.png
+testenv/

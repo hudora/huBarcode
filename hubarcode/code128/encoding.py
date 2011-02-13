@@ -1,7 +1,5 @@
 """Encoding data tables for code128 barcode encoder"""
 
-__revision__ = "$Rev: 1$"
-
 charset_a = \
 {
     ' ' :   0,        '!' :   1,        '"' :   2,        '#' :   3,

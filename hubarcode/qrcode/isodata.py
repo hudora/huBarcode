@@ -2,8 +2,6 @@
 
 import os.path
 
-__revision__ = "$Rev$"
-
 MAX_DATA_BITS = [
     128, 224, 352, 512, 688, 864, 992, 1232, 1456, 1728,
     2032, 2320, 2672, 2920, 3320, 3624, 4056, 4504, 5016, 5352,
@@ -276,4 +274,3 @@ def string_not(str1):
 
     return "".join([chr(256 + ~ord(x)) for x in str1])
 # end def string_not
-

@@ -1,7 +1,5 @@
 """Text encoder for code128 barcode encoder"""
 
-__revision__ = "$Rev: 1$"
-
 import logging
 log = logging.getLogger("code128")
 
@@ -12,10 +10,10 @@ START_A, START_B, START_C = 103, 104, 105
 TO_C, TO_B, TO_A = 99, 100, 101
 
 start_codes = \
-{ 
-    'A': START_A, 
-    'B': START_B, 
-    'C': START_C 
+{
+    'A': START_A,
+    'B': START_B,
+    'C': START_C
 }
 
 to_values = \
@@ -26,22 +24,22 @@ to_values = \
 }
 
 class TextEncoder:
-    """Class which encodes a raw text string into a list of 
+    """Class which encodes a raw text string into a list of
     character codes.
-    Adds in character set switch codes, and compresses pairs of 
+    Adds in character set switch codes, and compresses pairs of
     digits under character set C"""
-    
+
     def __init__( self ):
         self.current_charset = 'B'
         self.digits = ""
 
-            
+
     def switch_charset( self, new_charset ):
         """Switch to a new character set
         Return a single item list containing the switch code"""
-        
-        log.debug( "Switching charsets from %c to %c",  
-                    self.current_charset, new_charset )
+
+        log.debug("Switching charsets from %c to %c",
+                  self.current_charset, new_charset)
 
         if new_charset == 'A':
             switch_code = self.convert_char('TO_A')
@@ -53,10 +51,10 @@ class TextEncoder:
         self.current_charset = new_charset
 
         return [switch_code, ]
-            
+
 
     def switch_charset_if_necessary( self, char, lookahead ):
-        """Decide whether we want to switch charsets for the 
+        """Decide whether we want to switch charsets for the
         next character"""
 
         def upcoming_digits( ):
@@ -70,7 +68,7 @@ class TextEncoder:
                     break
 
             return num_digits > 3
-                    
+
 
         codes = []
         if self.current_charset == 'C' and not char.isdigit():
@@ -89,8 +87,8 @@ class TextEncoder:
 
              # Take care of the odd leftover digit if there is one
             if len(self.digits) == 1:
-                codes.append( self.convert_char(self.digits[0]) )
-
+                codes.append(self.convert_char(self.digits[0]))
+                self.digits = ''
 
         elif self.current_charset == 'B':
             # Do we want to switch from B?
@@ -123,11 +121,11 @@ class TextEncoder:
                     log.error( "No charset found for character %d" % ord(char) )
 
         return codes
-                
+
 
     def convert_char( self, char ):
         """Convert the given character into the current charset
-        For A and B and a few cases in C, this is a simple lookup in 
+        For A and B and a few cases in C, this is a simple lookup in
         the charset table.
         For most cases in C, this involves grouping consecutive digits
         into pairs and adding in each pair as a single character"""
@@ -160,24 +158,31 @@ class TextEncoder:
             enc[0:2] = [to_values[enc[1]]]
 
 
-    def encode( self, text ):
-        """Encode the given text, optimize it and return a 
+    def encode(self, text):
+        """Encode the given text, optimize it and return a
         list of character codes"""
-        
+
         encoded_text = []
 
-        encoded_text.append( start_codes[self.current_charset] )
+        # First symbol is always the start code for the initial charset
+        encoded_text.append(start_codes[self.current_charset])
 
         # Start with charset B
         for i, char in enumerate(text):
-            encoded_text += self.switch_charset_if_necessary( \
-                                    char, text[i:i+10] )
-
+            encoded_text.extend(self.switch_charset_if_necessary(
+                                            char, text[i:i+10]))
             converted = self.convert_char(char)
             if converted is not None:
-                encoded_text.append( converted )
-        
-        self.optimize_encoding( encoded_text )
+                encoded_text.append(converted)
+
+        # Finale Take care of the odd leftover digit if there is
+        # one from encoding Charset C
+        if len(self.digits) == 1:
+            # We now force Charset B
+            encoded_text.extend(self.switch_charset('B'))
+            encoded_text.append(self.convert_char(self.digits[0]))
+
+        self.optimize_encoding(encoded_text)
         return encoded_text
 
 
@@ -185,7 +190,7 @@ class TextEncoder:
         """Return the bar encoding (a string of ones and zeroes)
         representing the given encoded text and checksum digit.
         Stop code and termination bars are added onto the end"""
-        
+
         full_code = encoded_text + [checksum, ]
         bars = ""
         for char in full_code:
@@ -193,6 +198,5 @@ class TextEncoder:
 
         bars += encoding.STOP
         bars += "11"
-            
+
         return bars
-        

@@ -72,12 +72,11 @@ if len(sys.argv) > 1 and sys.argv[1] == 'bdist_wininst':
 
 setup(
     name='huBarcode',
-    version='0.62',
+    version='0.63',
     url='http://github.com/hudora/huBarcode',
     maintainer='Maximillian Dornseif',
     maintainer_email='md@hudora.de',
     description='generation of barcodes in Python',
-#    download_url = '',
     packages=packages,
     cmdclass=cmdclasses,
     data_files=data_files,

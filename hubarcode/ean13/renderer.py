@@ -1,7 +1,5 @@
 """Rendering code for EAN-13 barcode"""
 
-__revision__ = "$Rev$"
-
 import os
 import Image
 import ImageFont

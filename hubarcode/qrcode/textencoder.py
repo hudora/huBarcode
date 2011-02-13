@@ -1,7 +1,5 @@
 """Text encoder for QR Code encoder"""
 
-__revision__ = "$Rev$"
-
 import logging
 
 import isodata as isodata
@@ -217,4 +215,3 @@ class TextEncoder:
         self.matrix = self.minfo.finalize(matrix_content, mask_content)
     # end def create_matrix
 # end class TextEncoder
-

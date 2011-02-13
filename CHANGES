@@ -1,3 +1,6 @@
+0.63:   Fixes a bug in code 128 generation where an od number of more than
+        4 consecutive digits at the end of the input resulted in the last
+        digit going amiss, removed barcodeserver
 0.62:   better access to PIL/Image Data (thanks Tobias Paepke)
 0.61:   fixed QRcode installation issues (thanks Vladimir Mihailenco)
 0.57:   Code128 now supports TrueType Fonts and tie options bottom_border,
