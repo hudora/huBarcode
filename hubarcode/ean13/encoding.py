@@ -12,16 +12,16 @@ __revision__ = "$Rev: 1$"
 #
 parity_table = \
 {
-    0: ( 1, 1, 1, 1, 1, 1 ),
-    1: ( 1, 1, 0, 1, 0, 0 ),
-    2: ( 1, 1, 0, 0, 1, 0 ),
-    3: ( 1, 1, 0, 0, 0, 1 ),
-    4: ( 1, 0, 1, 1, 0, 0 ),
-    5: ( 1, 0, 0, 1, 1, 0 ),
-    6: ( 1, 0, 0, 0, 1, 1 ),
-    7: ( 1, 0, 1, 0, 1, 0 ),
-    8: ( 1, 0, 1, 0, 0, 1 ),
-    9: ( 1, 0, 0, 1, 0, 1 ) 
+    0: (1, 1, 1, 1, 1, 1),
+    1: (1, 1, 0, 1, 0, 0),
+    2: (1, 1, 0, 0, 1, 0),
+    3: (1, 1, 0, 0, 0, 1),
+    4: (1, 0, 1, 1, 0, 0),
+    5: (1, 0, 0, 1, 1, 0),
+    6: (1, 0, 0, 0, 1, 1),
+    7: (1, 0, 1, 0, 1, 0),
+    8: (1, 0, 1, 0, 0, 1),
+    9: (1, 0, 0, 1, 0, 1),
 }
 
 #
@@ -46,7 +46,7 @@ encoding_table = \
     9: ("0001011", "0010111", "1110100"),
 }
 
-def get_left_encoded( digit, parity ):
+def get_left_encoded(digit, parity):
     """Get the left hand encoding of the given digit, under
     the given parity (0=even or 1=odd)"""
 
@@ -57,7 +57,7 @@ def get_left_encoded( digit, parity ):
     else:
         return encoding_table[digit][1-parity]
 
-def get_right_encoded( digit ):    
+def get_right_encoded(digit):
     """Get the right hand encoding of the given digit"""
 
     if digit not in list(range(0, 10)):
