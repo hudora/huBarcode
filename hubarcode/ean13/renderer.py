@@ -80,10 +80,8 @@ class EAN13Renderer:
         # Draw the text
         font_size = font_sizes.get(bar_width, 24)
 
-        # Locate the font file relative to the module
-        eandir, _ = os.path.split(__file__)
-        rootdir, _ = os.path.split(eandir)
-        fontfile = os.path.join(rootdir, "fonts", "courR%02d.pil" % font_size)
+        # Use relative name, PIL will do searching for us
+        fontfile = os.path.join("fonts", "courR%02d.pil" % font_size)
 
         font = ImageFont.load_path(fontfile)
         draw = ImageDraw.Draw(img)
