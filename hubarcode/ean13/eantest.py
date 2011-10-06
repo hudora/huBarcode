@@ -4,12 +4,13 @@ import unittest
 
 from __init__ import EAN13Encoder
 
+
 class EAN13Test(unittest.TestCase):
     """Unit test class for EAN13 bar code encoder"""
 
     test_strings = ("012345678901",
                     "007567816412",
-                    "750103131130" )
+                    "750103131130")
 
     def test_check_digit(self):
         """Make sure the check digit calculation works"""
@@ -27,23 +28,22 @@ class EAN13Test(unittest.TestCase):
                         "000000001001": 6,
                         "000000000001": 7,
                         "000000001010": 8,
-                        "000000000010": 9 }
+                        "000000000010": 9}
         for code, check in check_digits.items():
-            enc = EAN13Encoder( code )
-            self.assertEqual( enc.check_digit, check )
+            enc = EAN13Encoder(code)
+            self.assertEqual(enc.check_digit, check)
 
     def test_parity(self):
         """Test the parity calculations"""
-        enc = EAN13Encoder( "750103131130" )
-        self.assertEqual( enc.get_parity( ), (1, 0, 1, 0, 1, 0) )
-
+        enc = EAN13Encoder("750103131130")
+        self.assertEqual(enc.get_parity(), (1, 0, 1, 0, 1, 0))
 
     def test_encoding(self):
         """Make the the left and right encodings work"""
-        enc = EAN13Encoder( "750103131130" )
-        left, right = enc.encode( )
-        self.assertEqual( left, "011000101001110011001010011101111010110011" )
-        self.assertEqual( right, "100001011001101100110100001011100101110100" )
+        enc = EAN13Encoder("750103131130")
+        left, right = enc.encode()
+        self.assertEqual(left, "011000101001110011001010011101111010110011")
+        self.assertEqual(right, "100001011001101100110100001011100101110100")
 
     def test_against_generated(self):
         """Compare the output of this library with generated barcodes"""

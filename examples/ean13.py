@@ -9,5 +9,5 @@ logging.getLogger("ean13").setLevel(logging.DEBUG)
 logging.getLogger("ean13").addHandler(logging.StreamHandler(sys.stdout))
 
 if __name__ == "__main__":
-    encoder = EAN13Encoder( sys.argv[1] )
-    encoder.save( "test.png" )
+    encoder = EAN13Encoder(sys.argv[1])
+    encoder.save("test.png")

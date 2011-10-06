@@ -44,7 +44,7 @@ class EAN13Renderer:
         image_width = (2 * quiet_width) + (num_bars * bar_width)
         image_height = image_width / 2
 
-        img = Image.new( 'L', (image_width, image_height), 255)
+        img = Image.new('L', (image_width, image_height), 255)
 
         class BarWriter:
             """Class which moves across the image, writing out bars"""
@@ -62,7 +62,7 @@ class EAN13Renderer:
                 if value == 1:
                     for ypos in range(self.symbol_top, bar_height):
                         for xpos in range(self.current_x, \
-                                            self.current_x+bar_width):
+                                            self.current_x + bar_width):
                             img.putpixel((xpos, ypos), 0)
                 self.current_x += bar_width
 
@@ -89,11 +89,11 @@ class EAN13Renderer:
 
         font = ImageFont.load_path(fontfile)
         draw = ImageDraw.Draw(img)
-        draw.text((1*bar_width, int(image_height*0.7)),
+        draw.text((1 * bar_width, int(image_height * 0.7)),
                    self.code[0], font=font)
-        draw.text((16*bar_width, int(image_height*0.8)),
+        draw.text((16 * bar_width, int(image_height * 0.8)),
                    self.code[1:7], font=font)
-        draw.text((63*bar_width, int(image_height*0.8)), self.code[7:], font=font)
+        draw.text((63 * bar_width, int(image_height * 0.8)), self.code[7:], font=font)
         self.width = image_width
         self.height = image_height
         return img
@@ -105,7 +105,7 @@ class EAN13Renderer:
         img = self.get_pilimage(bar_width)
         img.save(filename, "PNG")
 
-    def get_imagedata( self, bar_width ):
+    def get_imagedata(self, bar_width):
         """Write the matrix out as PNG to a bytestream"""
         buffer = StringIO()
         img = self.get_pilimage(bar_width)

@@ -44,6 +44,7 @@ encoding_table = \
     9: ("0001011", "0010111", "1110100"),
 }
 
+
 def get_left_encoded(digit, parity):
     """Get the left hand encoding of the given digit, under
     the given parity (0=even or 1=odd)"""
@@ -53,7 +54,8 @@ def get_left_encoded(digit, parity):
     elif digit not in list(range(0, 10)):
         raise Exception("Invalid digit '%s'" % digit)
     else:
-        return encoding_table[digit][1-parity]
+        return encoding_table[digit][1 - parity]
+
 
 def get_right_encoded(digit):
     """Get the right hand encoding of the given digit"""

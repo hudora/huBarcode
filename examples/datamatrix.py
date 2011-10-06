@@ -9,6 +9,6 @@ logging.getLogger("datamatrix").setLevel(logging.DEBUG)
 logging.getLogger("datamatrix").addHandler(logging.StreamHandler(sys.stdout))
 
 if __name__ == "__main__":
-    encoder = DataMatrixEncoder( sys.argv[1] )
-    encoder.save( "test.png" )
-    print encoder.get_ascii( )
+    encoder = DataMatrixEncoder(sys.argv[1])
+    encoder.save("test.png")
+    print encoder.get_ascii()
