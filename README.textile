@@ -55,6 +55,8 @@ Open Source barcode decoders we are aware of:
 
 h2. Changes
 
-See the [Changelog][changes].
+See the "Changelog":https://github.com/hudora/huBarcode/blob/master/CHANGES
 
-[changes]: https://github.com/hudora/huBarcode/blob/master/CHANGES
+h2. License
+
+The code is available under the Apache License, Version 2.0.
