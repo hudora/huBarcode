@@ -26,7 +26,8 @@ class Code128Renderer:
             * ttf_fontsize: the size the label is drawn in
             * label_border: number of pixels space between the barcode and the label
             * bottom_border: number of pixels space between the label and the bottom border
-            * height: height of the image in pixels """
+            * height: height of the image in pixels
+            * show_label: whether to show the label below the barcode (defaults to True) """
         self.options = options or {}
         self.bars = bars
         self.text = text
@@ -36,6 +37,8 @@ class Code128Renderer:
     def get_pilimage(self, bar_width):
         """Return the barcode as a PIL object"""
 
+        show_label = self.options.get('show_label', True)
+
         # 11 bars per character, plus the stop
         num_bars = len(self.bars)
 
@@ -44,19 +47,21 @@ class Code128Renderer:
         # Quiet zone is 10 bar widths on each side
         quiet_width = bar_width * 10
 
-        # Locate and load the font file relative to the module
-        c128dir, _ = os.path.split(__file__)
-        rootdir, _ = os.path.split(c128dir)
+        fontsize = 0
+        if show_label:
+            default_fontsize = FONT_SIZES.get(bar_width, 24)
+            fontsize = self.options.get('ttf_fontsize', default_fontsize)
+            ttf_font = self.options.get('ttf_font')
+            if ttf_font:
+                font = ImageFont.truetype(ttf_font, fontsize)
+            else:
+                # Locate and load the font file relative to the module
+                c128dir, _ = os.path.split(__file__)
+                rootdir, _ = os.path.split(c128dir)
 
-        default_fontsize = FONT_SIZES.get(bar_width, 24)
-        fontsize = self.options.get('ttf_fontsize', default_fontsize)
-        ttf_font = self.options.get('ttf_font')
-        if ttf_font:
-            font = ImageFont.truetype(ttf_font, fontsize)
-        else:
-            fontfile = os.path.join(rootdir, "fonts",
-                "courR%02d.pil" % fontsize)
-            font = ImageFont.load_path(fontfile)
+                fontfile = os.path.join(rootdir, "fonts",
+                    "courR%02d.pil" % fontsize)
+                font = ImageFont.load_path(fontfile)
 
         # Total image width
         self.image_width = (2 * quiet_width) + (num_bars * bar_width)
@@ -76,7 +81,10 @@ class Code128Renderer:
             def __init__(self, img, bar_height):
                 self.img = img
                 self.current_x = quiet_width
-                self.symbol_top = quiet_width / 2
+                if show_label:
+                    self.symbol_top = quiet_width / 2
+                else:
+                    self.symbol_top = 0
                 self.bar_height = bar_height
 
             def write_bar(self, value):
@@ -102,10 +110,11 @@ class Code128Renderer:
 
         # Draw the text
         draw = ImageDraw.Draw(img)
-        xtextwidth = font.getsize(self.text)[0]
-        xtextpos = self.image_width / 2 - (xtextwidth / 2)
-        ytextpos = bar_height + label_border
-        draw.text((xtextpos, ytextpos), self.text, font=font)
+        if show_label:
+            xtextwidth = font.getsize(self.text)[0]
+            xtextpos = self.image_width / 2 - (xtextwidth / 2)
+            ytextpos = bar_height + label_border
+            draw.text((xtextpos, ytextpos), self.text, font=font)
         return img
 
     def write_file(self, filename, bar_width):
