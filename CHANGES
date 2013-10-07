@@ -1,3 +1,4 @@
+1.0.0:  allow code128 without Text. Better Encoding cof code123, several cleanups
 0.63:   Fixes a bug in code 128 generation where an od number of more than
         4 consecutive digits at the end of the input resulted in the last
         digit going amiss, removed barcodeserver
