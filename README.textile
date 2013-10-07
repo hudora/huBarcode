@@ -12,7 +12,7 @@ If you worry about copyright you might consider this Software BSD-Licensed.
 If you are still worried, you might consider it GPL1/2/3 compatible.
 But don't worry.
 
-!https://raw.github.com/mdornseif/huBarcode/master/hubarcode/code128/test_img/3.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/ean13/test_img/3.png! !hhttps://raw.github.com/mdornseif/huBarcode/master/hubarcode/qrcode/test_img/1.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/qrcode/test_img/10.png!
+!https://raw.github.com/mdornseif/huBarcode/master/hubarcode/code128/test_img/3.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/ean13/test_img/3.png! !https://github.com/mdornseif/huBarcode/blob/master/sample_barcodes/hudora.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/qrcode/test_img/10.png!
 
 The interface of the different encoders is fairly straightforward:
 
