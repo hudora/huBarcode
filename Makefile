@@ -4,11 +4,11 @@ build:
 	python setup.py build
 
 upload: build
-	python setup.py sdist bdist_egg
+	python setup.py sdist
 
 publish: upload
 	# remove development tag
-	python setup.py build sdist bdist_egg upload
+	python setup.py build sdist upload
 
 install: build
 	sudo python setup.py install
