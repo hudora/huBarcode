@@ -8,9 +8,6 @@ supports
  * datamatrix
  * qrcode
 
-If you worry about copyright you might consider this Software BSD-Licensed.
-If you are still worried, you might consider it GPL1/2/3 compatible.
-But don't worry.
 
 !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/code128/test_img/3.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/ean13/test_img/3.png! !https://github.com/mdornseif/huBarcode/blob/master/sample_barcodes/hudora.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/qrcode/test_img/10.png!
 
@@ -39,7 +36,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 h2. Download
 
-You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/ or at "GitHub":http://github.com/hudora/huBarcode#.
+You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/ or at "GitHub":http://github.com/mdornseif/huBarcode#.
 
 
 h2. Decoders
@@ -55,8 +52,15 @@ Open Source barcode decoders we are aware of:
 
 h2. Changes
 
-See the "Changelog":https://github.com/hudora/huBarcode/blob/master/CHANGES
+See the "Changelog":https://github.com/hudora/mdornseif/blob/master/CHANGES
 
 h2. License
 
+If you worry about copyright you might consider this Software BSD-Licensed.
+If you are still worried, you might consider it GPL1/2/3 compatible.
+But don't worry. Im you need something formal:
 The code is available under the Apache License, Version 2.0.
+
+
+.. image:: https://travis-ci.org/mdornseif/huBarcode.png?branch=master
+   :target: https://travis-ci.org/mdornseif/huBarcode
