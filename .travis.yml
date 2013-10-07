@@ -10,6 +10,7 @@ install:
 - sudo apt-get install libdmtx-dev libdmtx-utils
 - pip install virtualenv
 - pip install coveralls
+- pip install pyflakes pep8 pylint
 - pip install Pillow
 script: make test check
 after_success: 
