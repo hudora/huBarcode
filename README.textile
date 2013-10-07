@@ -5,7 +5,7 @@ supports
 
  * code128
  * ean13
- * datamatrix 
+ * datamatrix
  * qrcode
 
 If you worry about copyright you might consider this Software BSD-Licensed.
@@ -20,26 +20,26 @@ The interface of the different encoders is fairly straightforward:
 >>> encoder = DataMatrixEncoder("HuDoRa")
 >>> encoder.save( "test.png" )
 >>> print encoder.get_ascii()
-XX  XX  XX  XX  XX  XX  XX  
+XX  XX  XX  XX  XX  XX  XX
 XX  XXXX  XXXXXX      XXXXXX
-XXXXXX    XX          XX    
+XXXXXX    XX          XX
 XXXXXX    XX        XXXX  XX
-XXXX  XX  XXXXXX            
+XXXX  XX  XXXXXX
 XXXXXX    XXXXXXXX    XXXXXX
-XX    XX  XXXXXXXX  XXXX    
+XX    XX  XXXXXXXX  XXXX
 XX    XX      XXXX      XXXX
-XX  XXXXXXXXXX    XXXX      
+XX  XXXXXXXXXX    XXXX
 XX  XXXX    XX            XX
-XX  XXXXXX  XXXXXX      XX  
+XX  XXXXXX  XXXXXX      XX
 XXXXXX  XX  XX  XX  XX    XX
-XX    XX              XX    
+XX    XX              XX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 </code></pre>
 
 
 h2. Download
 
-You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/ or at "GitHub":http://github.com/hudora/huBarcode#.
+You can get huBarcode at "the Python Cheeseshop":http://pypi.python.org/pypi/huBarcode/ or at "GitHub":http://github.com/mdornseif/huBarcode#.
 
 
 h2. Decoders
@@ -55,8 +55,11 @@ Open Source barcode decoders we are aware of:
 
 h2. Changes
 
-See the "Changelog":https://github.com/hudora/huBarcode/blob/master/CHANGES
+See the "Changelog":https://github.com/hudora/mdornseif/blob/master/CHANGES
 
 h2. License
 
 The code is available under the Apache License, Version 2.0.
+
+.. image:: https://travis-ci.org/mdornseif/huBarcode.png?branch=master
+   :target: https://travis-ci.org/mdornseif/huBarcode
