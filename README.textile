@@ -9,7 +9,7 @@ supports
  * qrcode
 
 
-!https://raw.github.com/mdornseif/huBarcode/master/hubarcode/code128/test_img/3.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/ean13/test_img/3.png! !https://github.com/mdornseif/huBarcode/blob/master/sample_barcodes/hudora.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/qrcode/test_img/10.png!
+!https://raw.github.com/mdornseif/huBarcode/master/hubarcode/code128/test_img/3.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/ean13/test_img/3.png! !https://raw.github.com/mdornseif/huBarcode/master/sample_barcodes/hudora.png! !https://raw.github.com/mdornseif/huBarcode/master/hubarcode/qrcode/test_img/10.png!
 
 The interface of the different encoders is fairly straightforward:
 
