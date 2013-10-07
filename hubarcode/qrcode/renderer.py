@@ -21,10 +21,10 @@ class QRCodeRenderer:
 
         self.mtx_size += width * 2
 
-        self.matrix = [[colour, ] * self.mtx_size, ] * width
-        self.matrix += [[colour, ] * width + self.matrix[i] + [colour, ] * width
-                        for i in range(0, self.mtx_size - (width * 2))]
-        self.matrix += [[colour, ] * self.mtx_size, ] * width
+        self.matrix = [[colour, ] * self.mtx_size, ] * width + \
+                      [[colour, ] * width + self.matrix[i] + [colour, ] * width
+                          for i in range(0, self.mtx_size - (width * 2))] + \
+                      [[colour, ] * self.mtx_size, ] * width
 
     def get_pilimage(self, cellsize):
         """Return the matrix as a PIL object"""
