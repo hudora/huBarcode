@@ -17,13 +17,8 @@ check:
 	-pep8 -r --ignore=E501 hubarcode/ean13/ hubarcode/datamatrix/ hubarcode/code128/ examples/
 	-pylint -iy --max-line-length=110 -d E1101 hubarcode/ean13/ hubarcode/datamatrix/ hubarcode/code128/ examples/ examples/
 
-testenv:
-	virtualenv testenv
-	testenv/bin/pip install coverage
-	testenv/bin/pip install PIL
-
 test: testenv
-	PYTHONPATH=. testenv/bin/python examples/code128.py TESTTEXT
-	PYTHONPATH=.:./hubarcode testenv/bin/python test/test_coverage.py
+	PYTHONPATH=.:./hubarcode python examples/code128.py TESTTEXT
+	PYTHONPATH=.:./hubarcode python test/test_coverage.py
 
 .PHONY: test testenv

@@ -1,13 +1,21 @@
 language: python
-python:
-  - "2.6"
-  - "2.7"
-# command to install dependencies
-install:
-  - pip install virtualenv
-  - pip install coveralls
-# install: "pip install -r requirements.txt --use-mirrors"
-# command to run tests
+python: 
+- "2.6"
+- "2.7"
+install: 
+- sudo apt-get -qq install liblcms1-dev libwebp-dev
+- sudo apt-get install libfreetype6 libfreetype6-dev zlib1g zlib1g-dev
+- sudo apt-get install libjpeg62 libjpeg62-dev
+- sudo apt-get install python-imaging
+- sudo apt-get install libdmtx
+- pip install virtualenv
+- pip install coveralls
+- pip install Pillow
 script: make test
-after_success:
-  - coveralls
+after_success: 
+- coveralls
+notifications: 
+  campfire: 
+    rooms: 
+      secure: JQjzkjzdoDwRwrYDZUtOGgCecwWm32uooPGqPCmRT39mGFv5G9g5BkOxE2LJtJegT7n1MhrtKlr2bG2qmBFDnqDSgZ42Fk6R6U2MwmCsFNUt2rrqRKM4X9NTCYyI5gfUI2oXiPjwqhRUyAwZsvQ1wlrhRqXD4K+NK+g0GqXtkYc=
+  email: false
