@@ -71,5 +71,5 @@ class Code128Encoder:
 
     def save(self, filename, bar_width=3):
         """Write the barcode out to an image file"""
-        Code128Renderer(self.bars, self.text,
-            self.options).write_file(filename, bar_width)
+        Code128Renderer(
+            self.bars, self.text, self.options).write_file(filename, bar_width)

@@ -1,3 +1,5 @@
+default: check
+
 build:
 	python setup.py build
 
@@ -14,8 +16,8 @@ install: build
 check:
 	-pyflakes hubarcode/ examples/
 	# PEP8 scheitert and den QR-code Tabellen.
-	-pep8 -r --ignore=E501 hubarcode/ean13/ hubarcode/datamatrix/ hubarcode/code128/ examples/
-	-pylint -iy --max-line-length=110 -d E1101 hubarcode/ean13/ hubarcode/datamatrix/ hubarcode/code128/ examples/ examples/
+	pep8 -r --ignore=E501 hubarcode/ean13/ hubarcode/datamatrix/ hubarcode/code128/ hubarcode/qrcode/*.py examples/
+	-pylint --max-line-length=110 -d E1101 hubarcode/ean13/ hubarcode/datamatrix/ hubarcode/code128/ examples/ examples/
 
 testenv:
 	virtualenv testenv

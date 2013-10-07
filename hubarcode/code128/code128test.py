@@ -10,19 +10,18 @@ class Code128Test(unittest.TestCase):
     """Unit test class for code128 bar code encoder"""
 
     test_strings = ("banana",
-                     "wer das liest ist 31337",
-                     "http://hudora.de/",
-                     "http://hudora.de/artnr/12345/12/",
-                     "http://hudora.de/track/00340059980000001319/",
-                     "12345678",
-                     "123456789"
+                    "wer das liest ist 31337",
+                    "http://hudora.de/",
+                    "http://hudora.de/artnr/12345/12/",
+                    "http://hudora.de/track/00340059980000001319/",
+                    "12345678",
+                    "123456789"
                     )
 
     def test_charset_encoding(self):
         """Make sure the character set encoding, code type switching
         and optimization works correctly"""
-        known_good = \
-        {
+        known_good = {
             # dense C encoding
             # immediate switch into C-mode, should compress
             "1234": [105, 12, 34],
@@ -49,8 +48,7 @@ class Code128Test(unittest.TestCase):
     def test_check_sum(self):
         """Make sure the checksum is calculated correctly"""
 
-        known_good = \
-        {
+        known_good = {
             "HI345678": 68,
             "BarCode 1": 33
         }

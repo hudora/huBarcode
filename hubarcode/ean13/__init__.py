@@ -103,8 +103,8 @@ class EAN13Encoder:
 
     def get_imagedata(self, bar_width=3):
         """Write the barcode out to a PNG bytestream"""
-        barcode = EAN13Renderer(self.full_code, self.left_bars,
-                self.right_bars, GUARDS)
+        barcode = EAN13Renderer(
+            self.full_code, self.left_bars, self.right_bars, GUARDS)
         imagedata = barcode.get_imagedata(bar_width)
         self.height = barcode.height
         self.width = barcode.width
@@ -113,6 +113,6 @@ class EAN13Encoder:
     def save(self, filename, bar_width=3):
         """Write the barcode out to an image file"""
         EAN13Renderer(self.full_code,
-                        self.left_bars,
-                        self.right_bars,
-                        GUARDS).write_file(filename, bar_width)
+                      self.left_bars,
+                      self.right_bars,
+                      GUARDS).write_file(filename, bar_width)

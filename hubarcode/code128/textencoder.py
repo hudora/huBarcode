@@ -153,7 +153,7 @@ class TextEncoder:
             enc[0:2] = [to_values[enc[1]]]
         # [START_X, FNC1, TO_Y]  => [START_Y, FNC1, ]
         elif enc[1] == 102 and enc[2] in to_values.keys():
-            enc[0:3] = [to_values[enc[2]],102]
+            enc[0:3] = [to_values[enc[2]], 102]
 
     def encode(self, text):
         """Encode the given text, optimize it and return a
@@ -167,7 +167,7 @@ class TextEncoder:
         # Start with charset B
         for i, char in enumerate(text):
             encoded_text.extend(self.switch_charset_if_necessary(
-                                            char, text[i:i + 10]))
+                char, text[i:i + 10]))
             converted = self.convert_char(char)
             if converted is not None:
                 encoded_text.append(converted)

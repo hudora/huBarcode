@@ -15,6 +15,7 @@ __revision__ = "$Rev$"
 from textencoder import TextEncoder
 from renderer import QRCodeRenderer
 
+
 class QRCodeEncoder:
     """Top-level class which handles the overall process of
     encoding input data, placing it in the matrix and
@@ -36,11 +37,11 @@ class QRCodeEncoder:
         qrc = QRCodeRenderer(self.matrix)
         qrc.write_file(cellsize, filename)
 
-    def get_imagedata( self, cellsize=5 ):
+    def get_imagedata(self, cellsize=5):
         """Write the matrix out to a PNG bytestream"""
 
         qrc = QRCodeRenderer(self.matrix)
-        imagedata = qrc.get_imagedata( cellsize )
+        imagedata = qrc.get_imagedata(cellsize)
         self.height = qrc.mtx_size
         self.width = qrc.mtx_size
         return imagedata
@@ -49,4 +50,3 @@ class QRCodeEncoder:
         """Return an ascii representation of the matrix"""
         qrc = QRCodeRenderer(self.matrix)
         return qrc.get_ascii()
-

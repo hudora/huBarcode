@@ -2,8 +2,7 @@
 
 import os
 from PIL import Image, ImageFont, ImageDraw
-from pkg_resources import resource_filename
-#handling movement of reduce to functools python >= 2.6
+# handling movement of reduce to functools python >= 2.6
 try:
     from functools import reduce
 except ImportError:
@@ -11,8 +10,7 @@ except ImportError:
 
 from cStringIO import StringIO
 # maps bar width against font size
-font_sizes = \
-{
+font_sizes = {
     1: 8,
     2: 14,
     3: 18,
@@ -59,8 +57,8 @@ class EAN13Renderer:
                 bar_height = int(image_height * (full and 0.9 or 0.8))
                 if value == 1:
                     for ypos in range(self.symbol_top, bar_height):
-                        for xpos in range(self.current_x, \
-                                            self.current_x + bar_width):
+                        for xpos in range(self.current_x,
+                                          self.current_x + bar_width):
                             img.putpixel((xpos, ypos), 0)
                 self.current_x += bar_width
 
@@ -86,9 +84,9 @@ class EAN13Renderer:
         font = ImageFont.load_path(fontfile)
         draw = ImageDraw.Draw(img)
         draw.text((1 * bar_width, int(image_height * 0.7)),
-                   self.code[0], font=font)
+                  self.code[0], font=font)
         draw.text((16 * bar_width, int(image_height * 0.8)),
-                   self.code[1:7], font=font)
+                  self.code[1:7], font=font)
         draw.text((63 * bar_width, int(image_height * 0.8)), self.code[7:], font=font)
         self.width = image_width
         self.height = image_height

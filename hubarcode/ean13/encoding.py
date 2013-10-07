@@ -8,8 +8,7 @@
 # 0 = even
 # 1 = odd
 #
-parity_table = \
-{
+parity_table = {
     0: (1, 1, 1, 1, 1, 1),
     1: (1, 1, 0, 1, 0, 0),
     2: (1, 1, 0, 0, 1, 0),
@@ -30,8 +29,7 @@ parity_table = \
 # Left hand side, even parity
 # Right hand side (all characters)
 #
-encoding_table = \
-{
+encoding_table = {
     0: ("0001101", "0100111", "1110010"),
     1: ("0011001", "0110011", "1100110"),
     2: ("0010011", "0011011", "1101100"),

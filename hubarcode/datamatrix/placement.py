@@ -93,7 +93,7 @@ class DataMatrixPlacer:
 
         self.place_bit((self.rows - 1, 0), (codeword & (0x01 << 7)) >> 7)
         self.place_bit((self.rows - 1, self.cols - 1),
-                                    (codeword & (0x01 << 6)) >> 6)
+                       (codeword & (0x01 << 6)) >> 6)
         self.place_bit((0, self.cols - 3), (codeword & (0x01 << 5)) >> 5)
         self.place_bit((0, self.cols - 2), (codeword & (0x01 << 4)) >> 4)
         self.place_bit((0, self.cols - 1), (codeword & (0x01 << 3)) >> 3)

@@ -3,6 +3,7 @@
 from cStringIO import StringIO
 from PIL import Image
 
+
 class QRCodeRenderer:
     """Rendering class - given a pre-populated QR Code matrix.
     it will add edge handles and render to either to an image
@@ -14,22 +15,16 @@ class QRCodeRenderer:
         self.matrix = matrix
     # end def __init__
 
-
     def add_border(self, colour=1, width=4):
         """Wrap the matrix in a border of given width
             and colour"""
 
         self.mtx_size += width * 2
 
-        self.matrix = \
-            [[colour, ] * self.mtx_size, ] * width + \
-            [[colour, ] * width + self.matrix[i] + [colour, ] * width
-        for i in range(0, self.mtx_size - (width * 2))] + \
-            [[colour, ] * self.mtx_size, ] * width
-        # end for
-    # end def add_border
-
-
+        self.matrix = [[colour, ] * self.mtx_size, ] * width
+        self.matrix += [[colour, ] * width + self.matrix[i] + [colour, ] * width
+                        for i in range(0, self.mtx_size - (width * 2))]
+        self.matrix += [[colour, ] * self.mtx_size, ] * width
 
     def get_pilimage(self, cellsize):
         """Return the matrix as a PIL object"""
@@ -42,21 +37,21 @@ class QRCodeRenderer:
 
         # write the buffer out to an image
         img = Image.frombuffer(
-                    'L',
-                    (self.mtx_size * cellsize, self.mtx_size * cellsize),
-                    buff, 'raw', 'L', 0, -1)
+            'L',
+            (self.mtx_size * cellsize, self.mtx_size * cellsize),
+            buff, 'raw', 'L', 0, -1)
         return img
 
-    def write_file( self, cellsize, filename ):
+    def write_file(self, cellsize, filename):
         """Write the matrix out to an image file"""
-        img = self.get_pilimage( cellsize )
-        img.save( filename )
+        img = self.get_pilimage(cellsize)
+        img.save(filename)
 
-    def get_imagedata( self, cellsize ):
+    def get_imagedata(self, cellsize):
         """Write the matrix out as PNG to an bytestream"""
         imagedata = StringIO()
-        img = self.get_pilimage( cellsize )
-        img.save( imagedata, "PNG" )
+        img = self.get_pilimage(cellsize)
+        img.save(imagedata, "PNG")
         return imagedata.getvalue()
 
     def get_buffer(self, cellsize):
@@ -77,13 +72,12 @@ class QRCodeRenderer:
         buf = ""
         for row in self.matrix[::-1]:
             bufrow = ''.join([pixel(cell) * cellsize for cell in row])
-            for _ in range (0, cellsize):
+            for _ in range(0, cellsize):
                 buf += bufrow
             # end for
         # end for
         return buf
     # end def get_buffer
-
 
     def get_ascii(self):
         """Write an ascii version of the matrix out to screen"""
@@ -97,8 +91,8 @@ class QRCodeRenderer:
             # end if
         # end def symbol
 
-        return '\n'.join([\
-                ''.join([symbol(cell) for cell in row]) \
-               for row in self.matrix]) + '\n'
+        return '\n'.join([
+            ''.join([symbol(cell) for cell in row])
+            for row in self.matrix]) + '\n'
     # end def get_ascii
 # end class QRCodeRenderer

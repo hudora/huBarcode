@@ -59,8 +59,8 @@ class Code128Renderer:
                 c128dir, _ = os.path.split(__file__)
                 rootdir, _ = os.path.split(c128dir)
 
-                fontfile = os.path.join(rootdir, "fonts",
-                    "courR%02d.pil" % fontsize)
+                fontfile = os.path.join(
+                    rootdir, "fonts", "courR%02d.pil" % fontsize)
                 font = ImageFont.load_path(fontfile)
 
         # Total image width
@@ -73,8 +73,8 @@ class Code128Renderer:
 
         # Image: has a white background
         bottom_border = self.options.get('bottom_border', 0)
-        img = Image.new('L', (self.image_width,
-            self.image_height + bottom_border), 255)
+        img = Image.new('L', (
+            self.image_width, self.image_height + bottom_border), 255)
 
         class BarWriter:
             """Class which moves across the image, writing out bars"""

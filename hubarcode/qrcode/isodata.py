@@ -21,28 +21,26 @@ MAX_DATA_BITS = [
     104, 176, 272, 384, 496, 608, 704, 880, 1056, 1232,
     1440, 1648, 1952, 2088, 2360, 2600, 2936, 3176, 3560, 3880,
     4096, 4544, 4912, 5312, 5744, 6032, 6464, 6968, 7288, 7880,
-    8264, 8920, 9368, 9848, 10288, 10832, 11408, 12016, 12656, 13328
-    ]
+    8264, 8920, 9368, 9848, 10288, 10832, 11408, 12016, 12656, 13328]
 
 
-MAX_CODEWORDS = [0, 26, 44, 70, 100, 134, 172, 196, 242,
+MAX_CODEWORDS = [
+    0, 26, 44, 70, 100, 134, 172, 196, 242,
     292, 346, 404, 466, 532, 581, 655, 733, 815, 901, 991, 1085, 1156,
     1258, 1364, 1474, 1588, 1706, 1828, 1921, 2051, 2185, 2323, 2465,
-    2611, 2761, 2876, 3034, 3196, 3362, 3532, 3706
-    ]
+    2611, 2761, 2876, 3034, 3196, 3362, 3532, 3706]
 
 
 MATRIX_REMAIN_BIT = [0, 0, 7, 7, 7, 7, 7, 0,
-                    0, 0, 0, 0, 0, 0, 3, 3,
-                    3, 3, 3, 3, 3, 4, 4, 4,
-                    4, 4, 4, 4, 3, 3, 3, 3,
-                    3, 3, 3, 0, 0, 0, 0, 0, 0]
+                     0, 0, 0, 0, 0, 0, 3, 3,
+                     3, 3, 3, 3, 3, 4, 4, 4,
+                     4, 4, 4, 4, 3, 3, 3, 3,
+                     3, 3, 3, 0, 0, 0, 0, 0, 0]
 
 
 class MatrixInfo:
     """ Provides QR Code version and Error Correction Level
     dependent information necessary for creating matrix"""
-
 
     def __init__(self, version, ecl):
         path = os.path.join(os.path.split(__file__)[0], 'qrcode_data')
@@ -107,11 +105,11 @@ class MatrixInfo:
             codeword_i = codewords[i]
             j = 7
             while j >= 0:
-                codeword_bits_number = (i << 3) +  j
+                codeword_bits_number = (i << 3) + j
                 pos_x = self.matrix_d[0][codeword_bits_number]
                 pos_y = self.matrix_d[1][codeword_bits_number]
                 mask = self.matrix_d[2][codeword_bits_number]
-                matrix[pos_x][pos_y] = ((255*(codeword_i & 1)) ^ mask )
+                matrix[pos_x][pos_y] = ((255 * (codeword_i & 1)) ^ mask)
                 codeword_i = codeword_i >> 1
                 j -= 1
             # end while
@@ -119,35 +117,34 @@ class MatrixInfo:
         # end while
 
         for matrix_remain in range(MATRIX_REMAIN_BIT[version], 0, -1):
-            remain_bit_temp = matrix_remain + ( max_codewords << 3) - 1
+            remain_bit_temp = matrix_remain + (max_codewords << 3) - 1
             pos_x = self.matrix_d[0][remain_bit_temp]
             pos_y = self.matrix_d[1][remain_bit_temp]
             mask = self.matrix_d[2][remain_bit_temp]
-            matrix[pos_x][pos_y] = ( 255 ^ mask )
+            matrix[pos_x][pos_y] = (255 ^ mask)
         # end for
         return matrix
     # end def create_matrix
-
 
     def put_format_info(self, matrix, format_info_value):
         """Put format information into the matrix"""
 
         format_info = ["101010000010010", "101000100100101",
-                        "101111001111100", "101101101001011",
-                        "100010111111001", "100000011001110",
-                        "100111110010111", "100101010100000",
-                        "111011111000100", "111001011110011",
-                        "111110110101010", "111100010011101",
-                        "110011000101111", "110001100011000",
-                        "110110001000001", "110100101110110",
-                        "001011010001001", "001001110111110",
-                        "001110011100111", "001100111010000",
-                        "000011101100010", "000001001010101",
-                        "000110100001100", "000100000111011",
-                        "011010101011111", "011000001101000",
-                        "011111100110001", "011101000000110",
-                        "010010010110100", "010000110000011",
-                        "010111011011010", "010101111101101"]
+                       "101111001111100", "101101101001011",
+                       "100010111111001", "100000011001110",
+                       "100111110010111", "100101010100000",
+                       "111011111000100", "111001011110011",
+                       "111110110101010", "111100010011101",
+                       "110011000101111", "110001100011000",
+                       "110110001000001", "110100101110110",
+                       "001011010001001", "001001110111110",
+                       "001110011100111", "001100111010000",
+                       "000011101100010", "000001001010101",
+                       "000110100001100", "000100000111011",
+                       "011010101011111", "011000001101000",
+                       "011111100110001", "011101000000110",
+                       "010010010110100", "010000110000011",
+                       "010111011011010", "010101111101101"]
 
         format_info_x1 = [0, 1, 2, 3, 4, 5, 7, 8, 8, 8, 8, 8, 8, 8, 8]
         format_info_y1 = [8, 8, 8, 8, 8, 8, 8, 8, 7, 5, 4, 3, 2, 1, 0]
@@ -158,12 +155,11 @@ class MatrixInfo:
         # end for
     # end def put_format_info
 
-
     def finalize(self, matrix_content, mask_content):
         """Create final matrix and put frame data into it"""
 
         mtx_size = len(matrix_content)
-        matrix = [[0 for i in range(mtx_size)] for j in range(mtx_size )]
+        matrix = [[0 for i in range(mtx_size)] for j in range(mtx_size)]
 
         for i in range(mtx_size):
             for j in range(mtx_size):
@@ -176,7 +172,6 @@ class MatrixInfo:
         # end for
         return matrix
     # end def finalize
-
 
     def calc_demerit_score(self, bit_r, dem_data):
         """Calculate demerit score"""
@@ -204,7 +199,6 @@ class MatrixInfo:
         return sum(demerit)
     # end def calc_demerit_score
 
-
     def calc_mask_number(self, matrix_content):
         """Calculate mask number for matrix"""
 
@@ -226,13 +220,15 @@ class MatrixInfo:
             dem_data = ["", "", "", ""]
             dem_data[0] = strings_and(hor_master, bit_mask)
             dem_data[1] = strings_and(ver_master, bit_mask)
-            dem_data[2] = strings_and(((chr(170) * mtx_size) + dem_data[1]),
-                                (dem_data[1] + (chr(170) * mtx_size)))
-            dem_data[3] = strings_or(((chr(170) * mtx_size) + dem_data[1]),
-                                (dem_data[1] + (chr(170) * mtx_size)))
+            dem_data[2] = strings_and(
+                ((chr(170) * mtx_size) + dem_data[1]),
+                (dem_data[1] + (chr(170) * mtx_size)))
+            dem_data[3] = strings_or(
+                ((chr(170) * mtx_size) + dem_data[1]),
+                (dem_data[1] + (chr(170) * mtx_size)))
             dem_data = [string_not(x) for x in dem_data]
 
-            str_split = lambda x, a: [x[p:p+a] for p in range(0, len(x), a)]
+            str_split = lambda x, a: [x[p:p + a] for p in range(0, len(x), a)]
             dem_data = [chr(170).join(str_split(x, mtx_size)) for x in dem_data]
 
             dem_data[0] += chr(170) + dem_data[1]

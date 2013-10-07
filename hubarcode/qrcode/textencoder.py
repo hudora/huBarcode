@@ -15,7 +15,6 @@ class BitStream:
         self.data = []
     # end def __init__
 
-
     def append(self, value, bitsnum):
         """Append 'bitsnum' bits to the end of bit stream"""
 
@@ -26,7 +25,6 @@ class BitStream:
             self.data.append((value >> i) & 0x01)
         # end for
     # end def append
-
 
     def prepend(self, value, bitsnum):
         """Prepend 'bitsnum' bits to the begining of bit stream"""
@@ -55,7 +53,6 @@ class TextEncoder:
         self.max_data_codewords = None
     # end def __init__
 
-
     def encode(self, text, ecl=None):
         """Encode the given text and add padding and error codes
         also set up the correct matrix size for the resulting codewords"""
@@ -64,7 +61,7 @@ class TextEncoder:
         if ecl is None:
             ecl = 'M'
         # end if
-        str2ecl = {"L":1, "l":1, "M":0, "m":0, "Q":3, "q":3, "H":2, "h":2}
+        str2ecl = {"L": 1, "l": 1, "M": 0, "m": 0, "Q": 3, "q": 3, "H": 2, "h": 2}
         self.ecl = str2ecl[ecl]
 
         self.encode_text(text)
@@ -75,14 +72,13 @@ class TextEncoder:
 
         self.append_error_codes()
 
-        LOG.debug("Codewords: " +
-                ' '.join([str(codeword) for codeword in self.codewords]))
+        LOG.debug(
+            "Codewords: " + ' '.join([str(codeword) for codeword in self.codewords]))
 
         self.create_matrix()
 
         return self.matrix
     # end def encode
-
 
     def encode_text(self, text):
         """Encode the given text into bitstream"""
@@ -133,7 +129,6 @@ class TextEncoder:
         # end for
     # end def encode_text
 
-
     def pad(self):
         """Pad out the encoded text to the correct word length"""
 
@@ -144,7 +139,6 @@ class TextEncoder:
             pad_idx = 1 - pad_idx
         # end for
     # end def pad
-
 
     def append_error_codes(self):
         """Calculate the necessary number of error codes for the encoded
@@ -159,8 +153,7 @@ class TextEncoder:
             rs_temp[rs_block_number].append(self.codewords[i])
 
             j += 1
-            if (j >= self.minfo.rs_block_order[rs_block_number] -
-                                                self.minfo.rs_ecc_codewords):
+            if (j >= self.minfo.rs_block_order[rs_block_number] - self.minfo.rs_ecc_codewords):
                 j = 0
                 rs_block_number += 1
                 rs_temp.append([])
@@ -197,7 +190,6 @@ class TextEncoder:
             rs_block_number += 1
         # end while
     # end def append_error_codes
-
 
     def create_matrix(self):
         """Create QR Code matrix"""
