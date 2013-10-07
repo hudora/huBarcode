@@ -58,7 +58,7 @@ h2. License
 
 If you worry about copyright you might consider this Software BSD-Licensed.
 If you are still worried, you might consider it GPL1/2/3 compatible.
-But don't worry. Im you need something formal:
+But don't worry. If you need something formal:
 The code is available under the Apache License, Version 2.0.
 
 

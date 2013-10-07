@@ -22,8 +22,8 @@ testenv:
 	testenv/bin/pip install coverage
 	testenv/bin/pip install PIL
 
-test: testenv
-	PYTHONPATH=. testenv/bin/python examples/code128.py TESTTEXT
-	PYTHONPATH=.:./hubarcode testenv/bin/python test/test_coverage.py
+test:
+	PYTHONPATH=.:./hubarcode python examples/code128.py TESTTEXT
+	PYTHONPATH=.:./hubarcode python test/test_coverage.py
 
 .PHONY: test testenv
