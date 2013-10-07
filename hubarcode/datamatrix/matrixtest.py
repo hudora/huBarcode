@@ -7,8 +7,8 @@ import os
 
 from __init__ import DataMatrixEncoder
 
-dmtxread_path = "/usr/local/bin/dmtxread"
-dmtxwrite_path = "/usr/local/bin/dmtxwrite"
+dmtxread_path = "dmtxread"
+dmtxwrite_path = "dmtxwrite"
 
 
 class MatrixTest(unittest.TestCase):
@@ -48,11 +48,12 @@ class MatrixTest(unittest.TestCase):
             encoder = DataMatrixEncoder(string)
             encoder.save("datamatrix-test.png")
 
-            if not os.path.exists(dmtxread_path):
+            if not (os.path.exists(os.path.join('/usr/bin', dmtxread_path))
+                    or os.path.exists(os.path.join('/usr/local/bin', dmtxread_path))):
                 print "%r does not exist, skipping decoding tests" % dmtxread_path
             else:
-                fin = os.popen("%s datamatrix-test.png" % (dmtxread_path))
-                self.assertEqual(fin.readline()[:-1], string)
+                fin = os.popen("sh -c '%s datamatrix-test.png'" % (dmtxread_path))
+                self.assertEqual(fin.readline(), string)
 
     def test_against_dmtx(self):
         """Compare the output of this library with that of dmtxwrite"""

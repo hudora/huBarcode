@@ -7,7 +7,7 @@ install:
 - sudo apt-get install libfreetype6 libfreetype6-dev zlib1g zlib1g-dev
 - sudo apt-get install libjpeg62 libjpeg62-dev
 - sudo apt-get install python-imaging
-- sudo apt-get install libdmtx
+- sudo apt-get install libdmtx-dev libdmtx-utils
 - pip install virtualenv
 - pip install coveralls
 - pip install Pillow
