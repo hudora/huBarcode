@@ -1,7 +1,12 @@
 """Rendering code for EAN-13 barcode"""
 
 import os
-from PIL import Image, ImageFont, ImageDraw
+try:
+    from PIL import Image, ImageFont, ImageDraw
+except ImportError:
+    import Image
+    import ImageFont
+    import ImageDraw
 # handling movement of reduce to functools python >= 2.6
 try:
     from functools import reduce
