@@ -1,6 +1,11 @@
 """Rendering code for code128 barcode"""
 from cStringIO import StringIO
-from PIL import Image, ImageFont, ImageDraw
+try:
+    from PIL import Image, ImageFont, ImageDraw
+except ImportError:
+    import Image
+    import ImageFont
+    import ImageDraw
 import logging
 import os
 
